@@ -1,0 +1,165 @@
+@use '_variables.scss' as *;
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: $secondary-color;
+    border-bottom: 1px solid $accent-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    .sidebar {
+        position: relative;
+
+        button {
+            background: transparent;
+            border: 2px solid transparent;
+            padding: 8px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 0;
+
+            svg {
+                fill: $light-color;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .sidebar-content {
+            position: fixed;
+            top: 100px;
+            left: 0;
+            height: calc(100vh - 100px);
+            width: 260px;
+            background-color: $secondary-color;
+            border-right: 1px solid $accent-color;
+            min-width: 200px;
+            display: none;
+            flex-direction: column;
+
+            a {
+                color: $light-color;
+                text-decoration: none;
+                padding: 12px 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                transform: all 0.2s ease;
+
+                &.active {
+                    background-color: $primary-color;
+                    border-radius: 6px;
+                }
+
+                &:hover {
+                    background-color: $dark-color;
+                    border-radius: 6px;
+                }
+
+                svg {
+                    fill: $light-color;
+                }
+            }
+
+            .spacer {
+                margin-top: 10px;
+            }
+
+            .close {
+                position: absolute;
+                top: 25px;
+                right: 10px;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+
+                svg {
+                    fill: $light-color;
+                    width: 24px;
+                    height: 24px;
+                }
+
+                @media (min-width: 768px) {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 768px) {
+                top: 0;
+                height: 100vh;
+                width: 100%;
+            }
+        }
+    }
+
+    .logo {
+        color: $light-color;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 1.5em;
+        margin-left: 6px;
+        display: inline-flex;
+        align-items: center;
+
+        .red {
+            color: $primary-color;
+        }
+    }
+
+    .search {
+        flex: 1;
+        margin: 0 30px;
+        max-width: 500px;
+
+        input {
+            background-color: $dark-color;
+            color: $light-color;
+            border-radius: 25px;
+            border: none;
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1em;
+
+            &::placeholder {
+                color: $light-color;
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+
+    .right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+
+        .profile {
+            border-radius: 50%;
+            background-color: $primary-color;
+            color: $light-color;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+}

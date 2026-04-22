@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #111111;
+  border-bottom: 1px solid #222222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+nav .sidebar {
+  position: relative;
+}
+nav .sidebar button {
+  background: transparent;
+  border: 2px solid transparent;
+  padding: 8px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 0;
+}
+nav .sidebar button svg {
+  fill: #F5F5F5;
+  width: 24px;
+  height: 24px;
+}
+nav .sidebar .sidebar-content {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  height: calc(100vh - 100px);
+  width: 260px;
+  background-color: #111111;
+  border-right: 1px solid #222222;
+  min-width: 200px;
+  display: none;
+  flex-direction: column;
+}
+nav .sidebar .sidebar-content a {
+  color: #F5F5F5;
+  text-decoration: none;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: all 0.2s ease;
+}
+nav .sidebar .sidebar-content a.active {
+  background-color: #FF0000;
+  border-radius: 6px;
+}
+nav .sidebar .sidebar-content a:hover {
+  background-color: #666666;
+  border-radius: 6px;
+}
+nav .sidebar .sidebar-content a svg {
+  fill: #F5F5F5;
+}
+nav .sidebar .sidebar-content .spacer {
+  margin-top: 10px;
+}
+nav .sidebar .sidebar-content .close {
+  position: absolute;
+  top: 25px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+nav .sidebar .sidebar-content .close svg {
+  fill: #F5F5F5;
+  width: 24px;
+  height: 24px;
+}
+@media (min-width: 768px) {
+  nav .sidebar .sidebar-content .close {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  nav .sidebar .sidebar-content {
+    top: 0;
+    height: 100vh;
+    width: 100%;
+  }
+}
+nav .logo {
+  color: #F5F5F5;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+}
+nav .logo .red {
+  color: #FF0000;
+}
+nav .search {
+  flex: 1;
+  margin: 0 30px;
+  max-width: 500px;
+}
+nav .search input {
+  background-color: #666666;
+  color: #F5F5F5;
+  border-radius: 25px;
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1em;
+}
+nav .search input::placeholder {
+  color: #F5F5F5;
+}
+@media (max-width: 768px) {
+  nav .search {
+    display: none;
+  }
+}
+nav .right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+nav .right .profile {
+  border-radius: 50%;
+  background-color: #FF0000;
+  color: #F5F5F5;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  nav .right {
+    display: none;
+  }
+}
+
+footer {
+  color: #F5F5F5;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 2px solid #222222;
+}
+footer a {
+  color: #FF0000;
+  text-decoration: none;
+}
+
+body {
+  background-color: #111111;
+  font-family: "Poppins", sans-serif;
+}
+
+/*# sourceMappingURL=style.css.map */
