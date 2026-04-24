@@ -69,8 +69,8 @@ nav .sidebar .sidebar-content .spacer {
 }
 nav .sidebar .sidebar-content .close {
   position: absolute;
-  top: 25px;
-  right: 10px;
+  top: 13px;
+  right: 20px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -87,9 +87,46 @@ nav .sidebar .sidebar-content .close svg {
 }
 @media (max-width: 768px) {
   nav .sidebar .sidebar-content {
-    top: 0;
     height: 100vh;
     width: 100%;
+  }
+}
+nav .mobile-menu {
+  display: none;
+}
+@media (max-width: 768px) {
+  nav .mobile-menu {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #111111;
+    border-top: 1px solid #222222;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+  }
+  nav .mobile-menu a {
+    color: #F5F5F5;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8em;
+    padding: 5px;
+  }
+  nav .mobile-menu a.active {
+    color: #FF0000;
+  }
+  nav .mobile-menu a:hover {
+    color: #FF0000;
+  }
+  nav .mobile-menu a svg {
+    fill: #F5F5F5;
+    width: 24px;
+    height: 24px;
   }
 }
 nav .logo {
@@ -109,7 +146,7 @@ nav .search {
   margin: 0 30px;
   max-width: 500px;
 }
-nav .search input {
+nav .search .search-input {
   background-color: #666666;
   color: #F5F5F5;
   border-radius: 25px;
@@ -118,12 +155,35 @@ nav .search input {
   padding: 10px 20px;
   font-size: 1em;
 }
-nav .search input::placeholder {
+nav .search .search-input::placeholder {
   color: #F5F5F5;
 }
 @media (max-width: 768px) {
   nav .search {
     display: none;
+  }
+}
+nav .mobile-search {
+  margin: 5px 10px;
+  max-width: 500px;
+  display: none;
+}
+nav .mobile-search .search-input {
+  background-color: #666666;
+  color: #F5F5F5;
+  border-radius: 25px;
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1em;
+  height: 20px;
+}
+nav .mobile-search .search-input::placeholder {
+  color: #F5F5F5;
+}
+@media (max-width: 768px) {
+  nav .mobile-search {
+    display: flex;
   }
 }
 nav .right {

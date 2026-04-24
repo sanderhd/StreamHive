@@ -77,8 +77,8 @@ nav {
 
             .close {
                 position: absolute;
-                top: 25px;
-                right: 10px;
+                top: 13px;
+                right: 20px;
                 background: transparent;
                 border: none;
                 cursor: pointer;
@@ -95,9 +95,50 @@ nav {
             }
 
             @media (max-width: 768px) {
-                top: 0;
                 height: 100vh;
                 width: 100%;
+            }
+        }
+    }
+
+    .mobile-menu {
+        display: none;
+
+        @media (max-width: 768px) {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: $secondary-color;
+            border-top: 1px solid $accent-color;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+
+            a {
+                color: $light-color;
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                font-size: 0.8em;
+                padding: 5px;
+
+                &.active {
+                    color: $primary-color;
+                }
+
+                &:hover {
+                    color: $primary-color;
+                }
+
+                svg {
+                    fill: $light-color;
+                    width: 24px;
+                    height: 24px;
+                }
             }
         }
     }
@@ -121,7 +162,7 @@ nav {
         margin: 0 30px;
         max-width: 500px;
 
-        input {
+        .search-input {
             background-color: $dark-color;
             color: $light-color;
             border-radius: 25px;
@@ -137,6 +178,31 @@ nav {
 
         @media (max-width: 768px) {
             display: none;
+        }
+    }
+
+    .mobile-search {
+        margin: 5px 10px;
+        max-width: 500px;
+        display: none;
+
+        .search-input { 
+            background-color: $dark-color;
+            color: $light-color;
+            border-radius: 25px;
+            border: none;
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1em;
+            height: 20px;
+
+            &::placeholder {
+                color: $light-color;
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
         }
     }
 
