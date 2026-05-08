@@ -1,0 +1,76 @@
+@use "_variables.scss" as *;
+@use "sass:color";
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 420px;
+    padding: 40px;
+    border: 1px solid $dark-color;
+    border-radius: 12px;
+    color: $light-color;
+
+    h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.7;
+        font-weight: normal;
+    }
+
+    a {
+        font-size: 12px;
+        color: $light-color;
+        opacity: 0.7;
+        text-decoration: none;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            input {
+                padding: 10px 12px;
+                border-radius: 8px;
+                border: 1px solid $dark-color;
+                background: transparent;
+                color: $light-color;
+                outline: none;
+
+                &:focus {
+                    border-color: $light-color;
+                }
+            }
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background: $primary-color;
+            color: $light-color;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+
+            &:hover {
+                opacity: 0.85;
+            }
+        }
+    }
+}

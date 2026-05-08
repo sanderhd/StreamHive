@@ -7,7 +7,6 @@ nav {
   padding: 15px 20px;
   background: #111111;
   border-bottom: 1px solid #222222;
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -25,7 +24,11 @@ nav .sidebar button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-right: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+nav .sidebar button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.05);
 }
 nav .sidebar button svg {
   fill: #F5F5F5;
@@ -43,29 +46,36 @@ nav .sidebar .sidebar-content {
   min-width: 200px;
   display: none;
   flex-direction: column;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
 }
 nav .sidebar .sidebar-content a {
   color: #F5F5F5;
   text-decoration: none;
   padding: 12px 15px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transform: all 0.2s ease;
-}
-nav .sidebar .sidebar-content a.active {
-  background-color: #FF0000;
-  border-radius: 6px;
-}
-nav .sidebar .sidebar-content a:hover {
-  background-color: #666666;
-  border-radius: 6px;
+  gap: 15px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease, padding-left 0.2s ease;
 }
 nav .sidebar .sidebar-content a svg {
   fill: #F5F5F5;
 }
+nav .sidebar .sidebar-content a:hover {
+  background-color: #ff3333;
+  transform: translateX(6px);
+  padding-left: 18px;
+}
+nav .sidebar .sidebar-content a.active {
+  background-color: #FF0000;
+  transform: translateX(4px);
+}
 nav .sidebar .sidebar-content .spacer {
-  margin-top: 10px;
+  margin-top: 25px;
 }
 nav .sidebar .sidebar-content .close {
   position: absolute;
@@ -74,6 +84,10 @@ nav .sidebar .sidebar-content .close {
   background: transparent;
   border: none;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+nav .sidebar .sidebar-content .close:hover {
+  transform: rotate(90deg);
 }
 nav .sidebar .sidebar-content .close svg {
   fill: #F5F5F5;
@@ -90,6 +104,11 @@ nav .sidebar .sidebar-content .close svg {
     height: 100vh;
     width: 100%;
   }
+}
+nav .sidebar .sidebar-content[style*="display: flex"] {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 nav .mobile-menu {
   display: none;
@@ -115,28 +134,29 @@ nav .mobile-menu {
     align-items: center;
     gap: 5px;
     font-size: 0.8em;
-    padding: 5px;
+    padding: 6px;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  nav .mobile-menu a:hover {
+    transform: translateY(-2px);
+    color: #FF0000;
   }
   nav .mobile-menu a.active {
     color: #FF0000;
   }
-  nav .mobile-menu a:hover {
-    color: #FF0000;
-  }
   nav .mobile-menu a svg {
-    fill: #F5F5F5;
+    fill: currentColor;
     width: 24px;
     height: 24px;
   }
 }
 nav .logo {
   color: #F5F5F5;
-  text-transform: capitalize;
   font-weight: bold;
   font-size: 1.5em;
-  margin-left: 6px;
   display: inline-flex;
   align-items: center;
+  text-transform: capitalize;
 }
 nav .logo .red {
   color: #FF0000;
@@ -154,9 +174,10 @@ nav .search .search-input {
   width: 100%;
   padding: 10px 20px;
   font-size: 1em;
+  outline: none;
 }
 nav .search .search-input::placeholder {
-  color: #F5F5F5;
+  color: rgba(245, 245, 245, 0.7);
 }
 @media (max-width: 768px) {
   nav .search {
@@ -164,9 +185,9 @@ nav .search .search-input::placeholder {
   }
 }
 nav .mobile-search {
+  display: none;
   margin: 5px 10px;
   max-width: 500px;
-  display: none;
 }
 nav .mobile-search .search-input {
   background-color: #666666;
@@ -176,10 +197,11 @@ nav .mobile-search .search-input {
   width: 100%;
   padding: 10px 20px;
   font-size: 1em;
-  height: 20px;
+  height: 38px;
+  outline: none;
 }
 nav .mobile-search .search-input::placeholder {
-  color: #F5F5F5;
+  color: rgba(245, 245, 245, 0.7);
 }
 @media (max-width: 768px) {
   nav .mobile-search {
@@ -188,20 +210,23 @@ nav .mobile-search .search-input::placeholder {
 }
 nav .right {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 15px;
 }
 nav .right .profile {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #FF0000;
   color: #F5F5F5;
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  transition: transform 0.2s ease;
+}
+nav .right .profile:hover {
+  transform: scale(1.1);
 }
 @media (max-width: 768px) {
   nav .right {
@@ -211,8 +236,9 @@ nav .right .profile {
 
 footer {
   color: #F5F5F5;
+  background-color: #111111;
   text-align: center;
-  padding: 10px 0;
+  padding: 5px 0;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -222,6 +248,121 @@ footer {
 footer a {
   color: #FF0000;
   text-decoration: none;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 420px;
+  padding: 40px;
+  border: 1px solid #666666;
+  border-radius: 12px;
+  color: #F5F5F5;
+}
+.auth-form h1 {
+  margin: 0;
+  font-size: 28px;
+}
+.auth-form h2 {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+  font-weight: normal;
+}
+.auth-form a {
+  font-size: 12px;
+  color: #F5F5F5;
+  opacity: 0.7;
+  text-decoration: none;
+}
+.auth-form a:hover {
+  opacity: 1;
+}
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.auth-form form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.auth-form form .field input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #666666;
+  background: transparent;
+  color: #F5F5F5;
+  outline: none;
+}
+.auth-form form .field input:focus {
+  border-color: #F5F5F5;
+}
+.auth-form form button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #FF0000;
+  color: #F5F5F5;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.auth-form form button:hover {
+  opacity: 0.85;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 24px;
+}
+.video-grid .video-card {
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.video-grid .video-card:hover {
+  transform: translateY(-4px);
+}
+.video-grid .video-card img {
+  width: 100%;
+  display: block;
+  background-color: #222222;
+}
+.video-grid .video-card h3 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 12px 16px 8px;
+}
+.video-grid .video-card .video-description {
+  color: #666666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 16px;
+}
+.video-grid .video-card .video-information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 18px;
+  color: #666666;
+}
+.video-grid .video-card .video-information .views {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.video-grid .video-card .video-information .views svg {
+  width: 18px;
+  height: 18px;
+  fill: #888;
 }
 
 body {
