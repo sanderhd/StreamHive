@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h1>Welcome back</h1>
             <h2>Welcome back! Please enter your details</h2>
 
-            <form action="/streamhive/login" method="POST">
+            <form action="login" method="POST">
 
                 <div class="field">
                     <label>Email or username</label>
@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <button>Login</button>
             </form>
-            <span>Don't have an account? <a href="/streamhive/register">Sign up for free</a></span>
+            <span>Don't have an account? <a href="register">Sign up for free</a></span>
         </div>
     </main>
 

@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="auth-form">
             <h1>Welcome!</h1>
 
-            <form action="/streamhive/register" method="POST">
+            <form action="register" method="POST">
 
                 <div class="field">
                     <label>Username</label>
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <button>Register</button>
             </form>
-            <span>Already a user? <a href="/streamhive/login">Log back in</a></span>
+            <span>Already a user? <a href="login">Log back in</a></span>
         </div>
     </main>
 
