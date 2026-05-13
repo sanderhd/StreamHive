@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Streamhive</title>
 
-    <link rel="stylesheet" href="/streamhive/public/assets/css/style.css">
-    <script src="/streamhive/public/assets/js/sidebar.js" defer></script>
+    <link rel="stylesheet" href="public/assets/css/style.css">
+    <script src="public/assets/js/sidebar.js" defer></script>
 </head>
 <body>
     <nav>

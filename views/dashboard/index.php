@@ -13,7 +13,7 @@ $videoModel = new VideoModel($db);
 $userId = $_SESSION["user_id"];
 
 if (!isset($_SESSION["user_id"])) {
-    header("Location: /streamhive/login");
+    header("Location: login");
     exit;
 }
 
@@ -27,8 +27,8 @@ $videos = $videoModel->getVideoByUserId($userId);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Streamhive</title>
 
-    <link rel="stylesheet" href="/streamhive/public/assets/css/style.css">
-    <script src="/streamhive/public/assets/js/sidebar.js" defer></script>
+    <link rel="stylesheet" href="public/assets/css/style.css">
+    <script src="public/assets/js/sidebar.js" defer></script>
 </head>
 <body>
     <nav>
