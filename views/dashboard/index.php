@@ -1,17 +1,23 @@
 <?php
 require_once __DIR__ . "/../../core/Database.php";
-require_once __DIR__ . "/../../app/services/AuthService.php";
-require_once __DIR__ . "/../../app/controllers/AuthController.php";
+require_once __DIR__ . "/../../app/models/UserModel.php";
+require_once __DIR__ . "/../../app/models/VideoModel.php";
+require_once __DIR__ . "/../../app/controllers/LogoutController.php";
 
-$config = require "config/Config.php";
+$config = require __DIR__ . "/../../config/Config.php";
 
 $db = new Database($config);
+$userModel = new UserModel($db);
+$videoModel = new VideoModel($db);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $controller = new AuthController($db);
-    $controller->login();
+$userId = $_SESSION["user_id"];
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: /streamhive/login");
+    exit;
 }
 
+$videos = $videoModel->getVideoByUserId($userId);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Streamhive</title>
+    <title>Streamhive</title>
 
     <link rel="stylesheet" href="/streamhive/public/assets/css/style.css">
     <script src="/streamhive/public/assets/js/sidebar.js" defer></script>
@@ -40,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input class="search-input" id="mobileSearchInput" placeholder="Search videos...">
                 </div>
 
-                <a href="/streamhive/views">
+                <a href="" class="active">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
                     Home                    
                 </a>
@@ -69,20 +75,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
         </div>
 
-        <h1 class="logo">STREAM<span class="red">HIVE</span></h1>
+        <a href="/streamhive/"><h1 class="logo">STREAM<span class="red">HIVE</span></h1></a>
 
        <div class="search">
             <input class="search-input" id="searchInput" placeholder="Search videos...">
         </div>
 
         <div class="right">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M360-320h80v-120h120v-80H440v-120h-80v120H240v80h120v120ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h480q33 0 56.5 23.5T720-720v180l160-160v440L720-420v180q0 33-23.5 56.5T640-160H160Zm0-80h480v-480H160v480Zm0 0v-480 480Z"/></svg>
+            <?php if (isset($_SESSION["user_id"])): ?>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M360-320h80v-120h120v-80H440v-120h-80v120H240v80h120v120ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h480q33 0 56.5 23.5T720-720v180l160-160v440L720-420v180q0 33-23.5 56.5T640-160H160Zm0-80h480v-480H160v480Zm0 0v-480 480Z"/></svg>
 
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
 
-            <div class="profile">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M324.5-404.5Q310-419 310-440t14.5-35.5Q339-490 360-490t35.5 14.5Q410-461 410-440t-14.5 35.5Q381-390 360-390t-35.5-14.5Zm240 0Q550-419 550-440t14.5-35.5Q579-490 600-490t35.5 14.5Q650-461 650-440t-14.5 35.5Q621-390 600-390t-35.5-14.5ZM480-160q134 0 227-93t93-227q0-24-3-46.5T786-570q-21 5-42 7.5t-44 2.5q-91 0-172-39T390-708q-32 78-91.5 135.5T160-486v6q0 134 93 227t227 93Zm0 80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-54-715q42 70 114 112.5T700-640q14 0 27-1.5t27-3.5q-42-70-114-112.5T480-800q-14 0-27 1.5t-27 3.5ZM177-581q51-29 89-75t57-103q-51 29-89 75t-57 103Zm249-214Zm-103 36Z"/></svg>
-            </div>
+                <a href="/streamhive/dashboard">
+                    <div class="profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M324.5-404.5Q310-419 310-440t14.5-35.5Q339-490 360-490t35.5 14.5Q410-461 410-440t-14.5 35.5Q381-390 360-390t-35.5-14.5Zm240 0Q550-419 550-440t14.5-35.5Q579-490 600-490t35.5 14.5Q650-461 650-440t-14.5 35.5Q621-390 600-390t-35.5-14.5ZM480-160q134 0 227-93t93-227q0-24-3-46.5T786-570q-21 5-42 7.5t-44 2.5q-91 0-172-39T390-708q-32 78-91.5 135.5T160-486v6q0 134 93 227t227 93Zm0 80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-54-715q42 70 114 112.5T700-640q14 0 27-1.5t27-3.5q-42-70-114-112.5T480-800q-14 0-27 1.5t-27 3.5ZM177-581q51-29 89-75t57-103q-51 29-89 75t-57 103Zm249-214Zm-103 36Z"/></svg>
+                    </div>
+                </a>
+            <?php else: ?>
+                <a href="/streamhive/login">
+                    Login
+                </a>
+                <a href="/streamhive/register">
+                    Register
+                </a>
+            <?php endif; ?>
         </div>
 
         <div class="mobile-menu">
@@ -108,28 +125,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </nav>
 
-    <main class="auth-container">
-        <div class="auth-form">
-            <h1>Welcome back</h1>
-            <h2>Welcome back! Please enter your details</h2>
+    <main class="dashboard">
+        <div class="dashboard-title">
+            <h2>My Videos</h2>
 
-            <form action="/streamhive/login" method="POST">
+            <div class="title-right">
+                <a href="/streamhive/dashboard/video/upload" class="logout">
+                    Upload
+                </a>
 
-                <div class="field">
-                    <label>Email or username</label>
-                    <input id="name" type="text" name="name">
+                <a href="/streamhive/logout" class="logout">
+                    Logout
+                </a>
+            </div>
+        </div>
+
+        <div class="video-grid">
+            <?php foreach ($videos as $video) { ?>
+                <div class="video-card">
+                    <img
+                        src="/streamhive/public/images/fallback.png"
+                        alt="<?= $video["title"] ?>"
+                    >
+                    <h3><?php echo $video["title"] ?></h3>
+                    <p class="video-description"><?php echo $video["description"] ?></p>
+
+                    <div class="video-information">
+                        <div class="views">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg> <?php echo $video["views"] ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg> <a href="/streamhive/dashboard/video/edit/<?php echo $video["id"] ?>">Edit</a>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="field">
-                    <label>Password</label>
-                    <input id="password" type="password" name="password">
-                </div>
-
-                <a href="">Forgot password</a>
-
-                <button>Login</button>
-            </form>
-            <span>Don't have an account? <a href="/streamhive/register">Sign up for free</a></span>
+            <?php } ?>
         </div>
     </main>
 

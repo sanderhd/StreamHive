@@ -1,0 +1,28 @@
+@use "_variables.scss" as *;
+@use "sass:color";
+
+.dashboard {
+    padding: 0 32px 0 32px;
+
+    .dashboard-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            color: $light-color;
+        }
+
+        .logout {
+            padding: 10px;
+            background-color: $primary-color;
+            color: $light-color;
+            border-radius: 10px;
+            text-decoration: none;
+
+            &:hover {
+                background-color: color.adjust($primary-color, $lightness: 10%);
+            }
+        }
+    }
+}

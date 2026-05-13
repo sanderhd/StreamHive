@@ -1,9 +1,17 @@
 <?php
 require_once __DIR__ . "/../../core/Database.php";
-require_once __DIR__ . "/../../app/models/UserModel.php";
+require_once __DIR__ . "/../../app/services/AuthService.php";
+require_once __DIR__ . "/../../app/controllers/AuthController.php";
 
-$db = new Database();
-$userModel = new UserModel($db);
+$config = require "config/Config.php";
+
+$db = new Database($config);
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $controller = new AuthController($db);
+    $controller->register();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -100,31 +108,35 @@ $userModel = new UserModel($db);
         </div>
     </nav>
 
-    <main>
+    <main class="auth-container">
         <div class="auth-form">
             <h1>Welcome!</h1>
-            <h2>Welcome! Please enter your details</h2>
 
-            <form action="login.php" method="POST">
+            <form action="/streamhive/register" method="POST">
+
+                <div class="field">
+                    <label>Username</label>
+                    <input id="username" type="text" name="username">
+                </div>
 
                 <div class="field">
                     <label>Email</label>
-                    <input placeholder="Enter your email">
+                    <input id="email" type="email" name="email">
                 </div>
 
                 <div class="field">
                     <label>Password</label>
-                    <input id="password" placeholder="••••••••••••">
+                    <input id="password" type="password" name="password">
                 </div>
 
                 <div class="field">
                     <label>Repeat Password</label>
-                    <input id="repeat-password" placeholder="••••••••••••">
+                    <input id="repeat-password" type="password" name="repeat-password">
                 </div>
 
                 <button>Register</button>
             </form>
-            <span>Already a user? <a href="login.php">Log back in</a></span>
+            <span>Already a user? <a href="/streamhive/login">Log back in</a></span>
         </div>
     </main>
 

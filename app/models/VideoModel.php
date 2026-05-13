@@ -32,4 +32,11 @@ class VideoModel {
             ["query" => $query]
         )->fetch();
     }
+
+    public function getVideoByUserId($userid) {
+        return $this->db->queryDatabase(
+            "SELECT * FROM videos WHERE user_id =:userid",
+            ["userid" => $userid]
+        )->fetchAll();
+    }
 }

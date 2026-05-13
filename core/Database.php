@@ -2,12 +2,11 @@
 
 class Database {
     private $conn;
-    private $host = "localhost";
-    private $dbName = "streamhive";
-    private $username = "root";
-    private $password = "";
+    private $config;
 
-    public function __construct() {
+    public function __construct($config) {
+        $this->config = $config['database'];
+
         $this->getConnection();
     }
 
@@ -15,9 +14,9 @@ class Database {
 
         try {
             $this->conn = new PDO(
-                "mysql:host=$this->host;dbname=$this->dbName",
-                $this->username,
-                $this->password,
+                "mysql:host={$this->config['host']};dbname={$this->config['dbname']}",
+                $this->config['username'],
+                $this->config['password'],
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 ]
@@ -32,8 +31,7 @@ class Database {
     public function queryDatabase($sql, $params = []) {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
+
         return $stmt;
     }
 }
-
-?>

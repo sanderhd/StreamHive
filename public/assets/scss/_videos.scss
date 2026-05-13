@@ -1,11 +1,14 @@
 @use '_variables.scss' as *;
 @use 'sass:color';
 
+.videos {
+    padding: 32px;
+}
+
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
-    padding: 24px;
 
     .video-card {
         border-radius: 16px;
