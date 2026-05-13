@@ -19,7 +19,7 @@ class AuthController {
 
         $this->authService->registerUser($username, $email, $password);
 
-        header("Location: /streamhive/login");
+        header("Location: login");
         exit;
     }
 
@@ -33,7 +33,7 @@ class AuthController {
             die("Invalied password or email");
         }
         
-        header("Location: /streamhive/dashboard");
+        header("Location: dashboard");
         exit;
     }
 }

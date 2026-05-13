@@ -7,7 +7,7 @@ class LogoutController {
         session_unset();
         session_destroy();
 
-        header("Location: /streamhive/login");
+        header("Location: login");
         exit;
     }
 }
