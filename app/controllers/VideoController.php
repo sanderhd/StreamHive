@@ -8,11 +8,18 @@ class VideoController {
     }
 
     public function uploadVideo() {
+        session_start();
+
+        if (!isset($_SESSION["user_id"])) {
+            header("Location: /login");
+            exit;
+        }
+
         $userId = $_SESSION["user_id"];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $thumbnail = $_FILES['thumbnail'];
-        $video = $_FILES['video'];
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $thumbnail = $_FILES["thumbnail"];
+        $video = $_FILES["video"];
 
         $this->videoService->uploadVideo(
             $userId,

@@ -8,20 +8,18 @@ class VideoService {
     }
 
     public function uploadVideo($userId, $title, $description, $thumbnail, $video) {
-        $videoName = time() . "_" . basename($video["name"]);
-        $thumbnailName = time() . "_" . basename($video['name']);
+        $videoPath = "public/uploads/videos/";
+        $thumbPath = "public/uploads/thumbnails/";
 
-        $videoPath = __DIR__ . "/../../public/uploads/videos" . $videoName;
-        $thumbnailPath = __DIR__ . "/../../public/uploads/thumbnails" . $thumbnailName;
+        $videoName = uniqid() . "_" . basename($video["name"]);
+        $thumbName = uniqid() . "_" . basename($thumbnail["name"]);
 
-        move_uploaded_file($video["tmp_name"], $videoPath);
-        move_uploaded_file($video["tmp_name"], $thumbnailPath);
+        move_uploaded_file($video["tmp_name"], $videoPath . $videoName);
+        move_uploaded_file($thumbnail["tmp_name"], $thumbPath . $thumbName);
 
         $sql = "
-            INSERT INTO videos
-            (user_id, title, description, filename, thumbnail)
-            VALUES
-            (:user_id, :title, :description, :filename, :thumbnail)
+            INSERT INTO videos (user_id, title, description, filename, thumbnail, views, created_at)
+            VALUES (:user_id, :title, :description, :filename, :thumbnail, 0, NOW())
         ";
 
         $this->db->queryDatabase($sql, [
@@ -29,13 +27,29 @@ class VideoService {
             "title" => $title,
             "description" => $description,
             "filename" => $videoName,
-            "thumbnail" => $thumbnailName
+            "thumbnail" => $thumbName
         ]);
     }
 
     public function deleteVideo($videoId, $userId) {
+        $video = $this->db->queryDatabase(
+            "SELECT * FROM videos WHERE id = :id AND user_id = :user_id",
+            [
+                "id" => $videoId,
+                "user_id" => $userId
+            ]
+        )->fetch();
+
+        if (!$video) {
+            return;
+        }
+
+        @unlink("public/uploads/videos/" . $video["filename"]);
+        @unlink("public/uploads/thumbnails/" . $video["thumbnail"]);
+
         $this->db->queryDatabase(
-            "DELETE FROM videos WHERE id = :id AND user_id = :user_id", [
+            "DELETE FROM videos WHERE id = :id AND user_id = :user_id",
+            [
                 "id" => $videoId,
                 "user_id" => $userId
             ]
