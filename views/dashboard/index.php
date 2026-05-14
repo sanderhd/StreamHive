@@ -130,11 +130,11 @@ $videos = $videoModel->getVideoByUserId($userId);
             <h2>My Videos</h2>
 
             <div class="title-right">
-                <a href="/streamhive/dashboard/video/upload" class="logout">
+                <a href="dashboard/video/upload" class="logout">
                     Upload
                 </a>
 
-                <a href="/streamhive/logout" class="logout">
+                <a href="logout" class="logout">
                     Logout
                 </a>
             </div>
@@ -144,7 +144,7 @@ $videos = $videoModel->getVideoByUserId($userId);
             <?php foreach ($videos as $video) { ?>
                 <div class="video-card">
                     <img
-                        src="/streamhive/public/images/fallback.png"
+                        src="public/images/fallback.png"
                         alt="<?= $video["title"] ?>"
                     >
                     <h3><?php echo $video["title"] ?></h3>
@@ -153,7 +153,8 @@ $videos = $videoModel->getVideoByUserId($userId);
                     <div class="video-information">
                         <div class="views">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg> <?php echo $video["views"] ?>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg> <a href="/streamhive/dashboard/video/edit/<?php echo $video["id"] ?>">Edit</a>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg> <a href="dashboard/video/edit/<?php echo $video["id"] ?>">Edit</a>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg> <a href="dashboard/video/delete/<?php echo $video["id"] ?>">Delete</a>
                         </div>
                     </div>
                 </div>

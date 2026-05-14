@@ -7,6 +7,7 @@ require_once "core/Router.php";
 
 require_once "app/controllers/AuthController.php";
 require_once "app/controllers/LogoutController.php";
+require_once "app/controllers/VideoController.php";
 
 require_once "app/models/CommentModel.php";
 require_once "app/models/LikeModel.php";
@@ -59,6 +60,18 @@ $router->get('/dashboard/video/edit/:id', function($id) use ($db) {
 
 $router->get('/dashboard/video/upload', function() {
     require "views/dashboard/video/upload.php";
+});
+
+$router->post('/dashboard/video/upload', function() use ($db) {
+    $controller = new VideoController($db);
+    $controller->uploadVideo();
+
+    require_once "app/controllers/VideoController.php";
+});
+
+$router->get('/dashboard/video/delete/:id', function($id) use ($db) {
+    $controller = new VideoController($db);
+    $controller->deleteVideo($id);
 });
 
 $router->get('/logout', function() {
