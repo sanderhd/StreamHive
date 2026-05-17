@@ -2,79 +2,108 @@
 @use "sass:color";
 
 .auth-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
+    min-height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    color: $light-color;
 }
 
 .auth-form {
+    width: 100%;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    width: 420px;
-    padding: 40px;
+    gap: 18px;
+    padding: 28px;
     border: 1px solid $dark-color;
-    border-radius: 12px;
-    color: $light-color;
+    border-radius: 16px;
 
     h1 {
         margin: 0;
-        font-size: 28px;
+        font-size: 26px;
     }
 
     h2 {
-        margin: 0;
-        font-size: 14px;
+        margin: 4px 0 0;
+        font-size: 13px;
         opacity: 0.7;
-        font-weight: normal;
+        font-weight: 400;
     }
 
-    a {
-        font-size: 12px;
-        color: $light-color;
-        opacity: 0.7;
-        text-decoration: none;
-
-        &:hover {
-            opacity: 1;
-        }
+    .bottom-text {
+        font-size: 13px;
+        opacity: 0.75;
+        text-align: center;
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 12px;
 
         .field {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
+
+            label {
+                font-size: 13px;
+                opacity: 0.8;
+            }
 
             input {
-                padding: 10px 12px;
-                border-radius: 8px;
+                height: 42px;
+                padding: 0 12px;
+                border-radius: 10px;
                 border: 1px solid $dark-color;
-                background: transparent;
-                color: $light-color;
-                outline: none;
 
                 &:focus {
-                    border-color: $light-color;
+                    border-color: $primary-color;
+                }
+            }
+
+            .password-field {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                input {
+                    width: 100%;
+                    padding-right: 42px;
+                }
+
+                .toggle-password {
+                    position: absolute;
+                    right: 10px;
+                    background: transparent;
+                    border: none;
+                    color: $light-color;
+                    cursor: pointer;
+                    opacity: 0.7;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+
+                    svg {
+                        color: $accent-color;
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
             }
         }
 
         button {
-            padding: 10px;
-            border-radius: 8px;
+            height: 42px;
             border: none;
-            background: $primary-color;
+            border-radius: 10px;
+            background-color: $primary-color;
             color: $light-color;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
 
             &:hover {
                 opacity: 0.85;

@@ -33,6 +33,15 @@
             margin: 12px 16px 8px;
         }
 
+        a {
+            color: $primary-color;
+            text-decoration: none;
+
+            &:hover {
+                color: color.adjust($primary-color, $lightness: 10%);
+            }
+        }
+
         .video-description {
             color: $dark-color;
             font-size: 0.9rem;

@@ -122,7 +122,7 @@ $videos = $videoModel->getAllVideos();
             <?php foreach ($videos as $video) { ?>
                 <div class="video-card">
                     <img 
-                        src="/streamhive/public/images/fallback.png"
+                        src="public/uploads/thumbnails/<?php echo $video["thumbnail"]?>"
                         alt="<?= $video["title"] ?>"
                     >
                     <h3 class=""><?php echo $video["title"] ?></h3>
