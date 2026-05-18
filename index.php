@@ -29,6 +29,13 @@ $router->get('/', function() use ($db) {
     require "views/index.php";
 });
 
+$router->get('/video/:id', function($id) use ($db) {
+    $videoModel = new VideoModel($db);
+    $video = $videoModel->getVideoById($id);
+
+    require "views/video/index.php";
+});
+
 $router->get('/login', function() {
     require "views/auth/login.php";
 });

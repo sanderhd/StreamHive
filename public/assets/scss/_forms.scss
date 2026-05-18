@@ -2,73 +2,105 @@
 @use "sass:color";
 
 .form-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
+    min-height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
 
     .video-form {
+        width: 100%;
+        max-width: 420px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        width: 420px;
-        padding: 40px;
+        gap: 16px;
+        padding: 28px;
         border: 1px solid $dark-color;
-        border-radius: 12px;
+        border-radius: 16px;
         color: $light-color;
 
         h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 24px;
         }
 
         .field {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
+
+            label {
+                font-size: 13px;
+                opacity: 0.8;
+            }
 
             input[type="file"] {
                 display: none;
             }
 
-            input {
+            input,
+            textarea {
+                width: 100%;
                 padding: 10px 12px;
-                border-radius: 8px;
+                border-radius: 10px;
                 border: 1px solid $dark-color;
                 background: transparent;
                 color: $light-color;
                 outline: none;
+                resize: vertical;
+                transition: 0.15s ease;
 
                 &:focus {
-                    border-color: $light-color;
+                    border-color: $primary-color;
                 }
             }
 
+            textarea {
+                min-height: 100px;
+            }
+
             .file-upload {
-                border: 1px solid $primary-color;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 16px 12px;
+                justify-content: center;
+                gap: 6px;
+                padding: 20px 16px;
+                border: 1px dashed $primary-color;
+                border-radius: 12px;
                 cursor: pointer;
                 text-align: center;
-                border-radius: 8px;
+                transition: 0.15s ease;
+
+                &:hover {
+                    background-color: rgba($color: $light-color, $alpha: 0.03);
+                }
+
+                svg {
+                    width: 28px;
+                    height: 28px;
+                    opacity: 0.8;
+                }
+
+                span {
+                    font-size: 13px;
+                    opacity: 0.75;
+                }
             }
         }
 
         button {
-            padding: 10px;
-            border-radius: 8px;
+            height: 42px;
             border: none;
+            border-radius: 10px;
             background-color: $primary-color;
             color: $light-color;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
+            transition: 0.15s ease;
 
             &:hover {
-                opacity: 0.85;
+                opacity: 0.9;
             }
         }
     }

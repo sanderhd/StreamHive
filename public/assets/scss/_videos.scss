@@ -5,6 +5,12 @@
     padding: 32px;
 }
 
+.video-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

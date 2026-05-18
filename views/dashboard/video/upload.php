@@ -143,7 +143,7 @@ if (!isset($_SESSION["user_id"])) {
 
                 <div class="field">
                     <label>Description</label>
-                    <input id="description" type="text" name="description">
+                    <textarea id="description" name="description"></textarea>
                 </div>
 
                 <div class="field">
