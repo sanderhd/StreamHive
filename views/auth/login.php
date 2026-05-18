@@ -133,13 +133,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </div>
 
-                <a href="">Forgot password</a>
+                <a href="">Forgot password?</a>
 
                 <button>Login</button>
             </form>
             <span class="bottom-text">
                 Don't have an account?
-                <a href="register">Sign up for free</a>
+                <a href="register">Sign up for free &rarr;</a>
             </span>
         </div>
     </main>

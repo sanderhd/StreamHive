@@ -36,6 +36,17 @@
         font-size: 13px;
         opacity: 0.75;
         text-align: center;
+
+        a {
+            text-decoration: none;
+            color: $primary-color;
+            opacity: 0.85;
+            transition: 0.2s ease;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 
     form {
@@ -58,6 +69,7 @@
                 padding: 0 12px;
                 border-radius: 10px;
                 border: 1px solid $dark-color;
+                background-color: $accent-color;
 
                 &:focus {
                     border-color: $primary-color;
@@ -107,6 +119,17 @@
 
             &:hover {
                 opacity: 0.85;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: $primary-color;
+            opacity: 0.85;
+            transition: 0.2s ease;
+
+            &:hover {
+                opacity: 1;
             }
         }
     }

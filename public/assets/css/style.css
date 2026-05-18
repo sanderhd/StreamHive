@@ -376,6 +376,15 @@ footer a {
   opacity: 0.75;
   text-align: center;
 }
+.auth-form .bottom-text a {
+  text-decoration: none;
+  color: #FF0000;
+  opacity: 0.85;
+  transition: 0.2s ease;
+}
+.auth-form .bottom-text a:hover {
+  opacity: 1;
+}
 .auth-form form {
   display: flex;
   flex-direction: column;
@@ -395,6 +404,7 @@ footer a {
   padding: 0 12px;
   border-radius: 10px;
   border: 1px solid #666666;
+  background-color: #222222;
 }
 .auth-form form .field input:focus {
   border-color: #FF0000;
@@ -436,6 +446,15 @@ footer a {
 }
 .auth-form form button:hover {
   opacity: 0.85;
+}
+.auth-form form a {
+  text-decoration: none;
+  color: #FF0000;
+  opacity: 0.85;
+  transition: 0.2s ease;
+}
+.auth-form form a:hover {
+  opacity: 1;
 }
 
 .videos {
