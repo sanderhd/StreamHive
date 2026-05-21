@@ -1,21 +1,15 @@
 <?php
-require_once __DIR__ . "/../../../core/Database.php";
-require_once __DIR__ . "/../../../app/models/UserModel.php";
-require_once __DIR__ . "/../../../app/models/VideoModel.php";
-require_once __DIR__ . "/../../../app/controllers/LogoutController.php";
+require_once __DIR__ . "/../core/Database.php";
+require_once __DIR__ . "/../app/models/UserModel.php";
+require_once __DIR__ . "/../app/models/VideoModel.php";
 
-$config = require __DIR__ . "/../../../config/Config.php";
+$config = require __DIR__ . "/../config/Config.php";
 
 $db = new Database($config);
 $userModel = new UserModel($db);
 $videoModel = new VideoModel($db);
 
-$userId = $_SESSION["user_id"];
-
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login");
-    exit;
-}
+$videos = $videoModel->getTrendingVideos();
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +17,10 @@ if (!isset($_SESSION["user_id"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streamhive</title>
+    <title>Trending | Streamhive</title>
 
-    <link rel="stylesheet" href="../../public/assets/css/style.css">
-    <script src="../../public/assets/js/sidebar.js" defer></script>
+    <link rel="stylesheet" href="public/assets/css/style.css">
+    <script src="public/assets/js/sidebar.js" defer></script>
 </head>
 <body>
     <nav>
@@ -44,12 +38,12 @@ if (!isset($_SESSION["user_id"])) {
                     <input class="search-input" id="mobileSearchInput" placeholder="Search videos...">
                 </div>
 
-                <a href="<?php echo $config["base_path"]; ?>" class="active">
+                <a href="<?php echo $config["base_path"]; ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
                     Home                    
                 </a>
 
-                <a href="<?php echo $config["base_path"]; ?>/trending">
+                <a href="<?php echo $config["base_path"]; ?>/trending" class="active">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-400q0 52 21 98.5t60 81.5q-1-5-1-9v-9q0-32 12-60t35-51l113-111 113 111q23 23 35 51t12 60v9q0 4-1 9 39-35 60-81.5t21-98.5q0-50-18.5-94.5T648-574q-20 13-42 19.5t-45 6.5q-62 0-107.5-41T401-690q-39 33-69 68.5t-50.5 72Q261-513 250.5-475T240-400Zm240 52-57 56q-11 11-17 25t-6 29q0 32 23.5 55t56.5 23q33 0 56.5-23t23.5-55q0-16-6-29.5T537-292l-57-56Zm0-492v132q0 34 23.5 57t57.5 23q18 0 33.5-7.5T622-658l18-22q74 42 117 117t43 163q0 134-93 227T480-80q-134 0-227-93t-93-227q0-129 86.5-245T480-840Z"/></svg>
                     Trending                    
                 </a>
@@ -106,7 +100,7 @@ if (!isset($_SESSION["user_id"])) {
                 Home                    
             </a>
 
-            <a href="<?php echo $config["base_path"]; ?>/trending">
+            <a href="<?php echo $config["base_path"]; ?>/trending" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-400q0 52 21 98.5t60 81.5q-1-5-1-9v-9q0-32 12-60t35-51l113-111 113 111q23 23 35 51t12 60v9q0 4-1 9 39-35 60-81.5t21-98.5q0-50-18.5-94.5T648-574q-20 13-42 19.5t-45 6.5q-62 0-107.5-41T401-690q-39 33-69 68.5t-50.5 72Q261-513 250.5-475T240-400Zm240 52-57 56q-11 11-17 25t-6 29q0 32 23.5 55t56.5 23q33 0 56.5-23t23.5-55q0-16-6-29.5T537-292l-57-56Zm0-492v132q0 34 23.5 57t57.5 23q18 0 33.5-7.5T622-658l18-22q74 42 117 117t43 163q0 134-93 227T480-80q-134 0-227-93t-93-227q0-129 86.5-245T480-840Z"/></svg>
                 Trending                    
             </a>
@@ -123,47 +117,28 @@ if (!isset($_SESSION["user_id"])) {
         </div>
     </nav>
 
-    <main class="dashboard">
-        <div class="dashboard-title">
-            <h2>Upload Video</h2>
-
-            <div class="title-right">
-                <a href="javascript:history.back()" class="logout">Back</a>
-            </div>
-        </div>
-
-        <div class="form-container">
-            <form action="upload" method="POST" enctype="multipart/form-data" class="video-form">
-                <h1>Upload Video</h1>
-                
-                <div class="field">
-                    <label>Title</label>
-                    <input id="title" type="text" name="title">
-                </div>
-
-                <div class="field">
-                    <label>Description</label>
-                    <textarea id="description" name="description"></textarea>
-                </div>
-
-                <div class="field">
-                    <label for="thumbnail-upload" class="file-upload">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-280h480L570-480 450-320l-90-120-120 160Zm-80 160q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
-                        Upload Thumbnail
-                    </label>
-                    <input id="thumbnail-upload" type="file" accept=".png" name="thumbnail" />
-                </div>
-
-                <div class="field">
-                    <label for="video-upload" class="file-upload">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
-                        Upload Video
-                    </label>
-                    <input id="video-upload" type="file" accept=".mp4" name="video" />
-                </div>
-
-                <button>Upload</button>
-            </form>
+    <main class="videos">
+        <h2>Currently hot!</h2>
+        <div class="video-grid">
+            <?php foreach ($videos as $video) { ?>
+                <a href="video/<?php echo $video["id"] ?>" class="video-link">
+                    <div class="video-card">
+                        <img 
+                            src="public/uploads/thumbnails/<?php echo $video["thumbnail"]?>"
+                            alt="<?= $video["title"] ?>"
+                        >
+                        <h3 class=""><?php echo $video["title"] ?></h3>
+                        <p class="video-description"><?php echo $video["description"] ?></p>
+                        
+                        <div class="video-information">
+                            <div class="views">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg> <?php echo $video["views"] ?>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M291.5-411.5Q280-423 280-440t11.5-28.5Q303-480 320-480t28.5 11.5Q360-457 360-440t-11.5 28.5Q337-400 320-400t-28.5-11.5Zm160 0Q440-423 440-440t11.5-28.5Q463-480 480-480t28.5 11.5Q520-457 520-440t-11.5 28.5Q497-400 480-400t-28.5-11.5Zm160 0Q600-423 600-440t11.5-28.5Q623-480 640-480t28.5 11.5Q680-457 680-440t-11.5 28.5Q657-400 640-400t-28.5-11.5ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg> <?php echo $video["created_at"] ?>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            <?php } ?>
         </div>
     </main>
 

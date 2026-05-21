@@ -8,6 +8,7 @@ require_once "core/Router.php";
 require_once "app/controllers/AuthController.php";
 require_once "app/controllers/LogoutController.php";
 require_once "app/controllers/VideoController.php";
+require_once "app/controllers/CommentsController.php";
 
 require_once "app/models/CommentModel.php";
 require_once "app/models/LikeModel.php";
@@ -29,11 +30,46 @@ $router->get('/', function() use ($db) {
     require "views/index.php";
 });
 
-$router->get('/video/:id', function($id) use ($db) {
+$router->get('/trending', function() use ($db) {
     $videoModel = new VideoModel($db);
+    $videos = $videoModel->getTrendingVideos();
+
+    require "views/trending.php";
+});
+
+$router->get('/video/:id', function($id) use ($db) {
+    $videoService = new VideoService($db);
+    $videoModel = new VideoModel($db);
+
+    $commentModel = new CommentModel($db);
+    $commentService = new CommentService($commentModel);
+
+    if (!isset($_SESSION["viewed_videos"])) {
+        $_SESSION["viewed_videos"] = [];
+    }
+
+    if (!in_array($id, $_SESSION["viewed_videos"])) {
+        $videoService->registerView($id);
+        $_SESSION["viewed_videos"][] = $id;
+    }
+
     $video = $videoModel->getVideoById($id);
+    $comments = $commentService->getComments($id);
 
     require "views/video/index.php";
+});
+
+$router->post('/video/:id/comment', function($id) use ($db) {
+    $controller = new CommentController($db);
+    $controller->add($id);
+});
+
+$router->post('/video/:id/delete-comment', function($id) use ($db) {
+    $controller = new CommentController($db);
+
+    $commentId = $_POST['comment_id'];
+
+    $controller->delete($id, $commentId);
 });
 
 $router->get('/login', function() {

@@ -1,9 +1,12 @@
 <?php
+$config = require __DIR__ . "/../../config/Config.php";
 
 class VideoController {
     private $videoService;
+    private $config;
 
     public function __construct($db) {
+        $this->config = require __DIR__ . "/../../config/Config.php";
         $this->videoService = new VideoService($db);
     }
 
@@ -29,7 +32,7 @@ class VideoController {
             $video
         );
 
-        header("Location: ../../dashboard");
+        header("Location: " . $this->config["base_path"] . "/dashboard");
         exit;
     }
 
@@ -37,7 +40,7 @@ class VideoController {
         $userId = $_SESSION["user_id"];
         $this->videoService->deleteVideo($id, $userId);
 
-        header("Location: ../../");
+        header("Location: " . $this->config["base_path"] . "/dashboard");
         exit;
     } 
 }

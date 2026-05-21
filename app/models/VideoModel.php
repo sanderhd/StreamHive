@@ -20,6 +20,12 @@ class VideoModel {
         )->fetchAll();
     }
 
+    public function getTrendingVideos() {
+        return $this->db->queryDatabase(
+            "SELECT * FROM videos ORDER BY views DESC"
+        )->fetchAll();
+    }
+
     public function uploadVideo($title, $description, $userid, $filename) {
         return $this->db->queryDatabase(
         

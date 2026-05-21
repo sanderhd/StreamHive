@@ -55,4 +55,13 @@ class VideoService {
             ]
         );
     }
+
+    public function registerView($videoId) {
+        $this->db->queryDatabase(
+            "UPDATE videos SET views = views + 1 WHERE id = :id",
+            [
+                "id" => $videoId,
+            ]
+        );
+    }
 }

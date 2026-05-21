@@ -39,36 +39,36 @@ $videos = $videoModel->getVideoById($video["id"]);
                     <input class="search-input" id="mobileSearchInput" placeholder="Search videos...">
                 </div>
 
-                <a href="" class="active">
+                <a href="<?php echo $config['base_path'] ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
                     Home                    
                 </a>
 
-                <a href="">
+                <a href="<?php echo $config["base_path"]; ?>/trending">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-400q0 52 21 98.5t60 81.5q-1-5-1-9v-9q0-32 12-60t35-51l113-111 113 111q23 23 35 51t12 60v9q0 4-1 9 39-35 60-81.5t21-98.5q0-50-18.5-94.5T648-574q-20 13-42 19.5t-45 6.5q-62 0-107.5-41T401-690q-39 33-69 68.5t-50.5 72Q261-513 250.5-475T240-400Zm240 52-57 56q-11 11-17 25t-6 29q0 32 23.5 55t56.5 23q33 0 56.5-23t23.5-55q0-16-6-29.5T537-292l-57-56Zm0-492v132q0 34 23.5 57t57.5 23q18 0 33.5-7.5T622-658l18-22q74 42 117 117t43 163q0 134-93 227T480-80q-134 0-227-93t-93-227q0-129 86.5-245T480-840Z"/></svg>
                     Trending                    
                 </a>
 
-                <a href="">
+                <a href="<?php echo $config["base_path"]; ?>/subscriptions">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M160-80q-33 0-56.5-23.5T80-160v-400q0-33 23.5-56.5T160-640h640q33 0 56.5 23.5T880-560v400q0 33-23.5 56.5T800-80H160Zm0-80h640v-400H160v400Zm240-40 240-160-240-160v320ZM160-680v-80h640v80H160Zm120-120v-80h400v80H280ZM160-160v-400 400Z"/></svg>
                     Subscriptions                
                 </a>
 
                 <div class="spacer"></div>
 
-                <a href="">
+                <a href="<?php echo $config["base_path"]; ?>/library">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M400-400h160v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80Zm-80 400q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
                     Library
                 </a>
 
-                <a href="">
+                <a href="<?php echo $config["base_path"]; ?>/history">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M480-80q-155 0-269-103T82-440h81q15 121 105.5 200.5T480-160q134 0 227-93t93-227q0-134-93-227t-227-93q-86 0-159.5 42.5T204-640h116v80H88q29-140 139-230t253-90q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm112-232L440-464v-216h80v184l128 128-56 56Z"/></svg>
                     History
                 </a>
             </div>
         </div>
 
-        <a href="/"><h1 class="logo">STREAM<span class="red">HIVE</span></h1></a>
+        <a href="<?php echo $config["base_path"]; ?>"><h1 class="logo">STREAM<span class="red">HIVE</span></h1></a>
 
        <div class="search">
             <input class="search-input" id="searchInput" placeholder="Search videos...">
@@ -80,38 +80,38 @@ $videos = $videoModel->getVideoById($video["id"]);
 
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
 
-                <a href="dashboard">
+                <a href="<?php echo $config["base_path"]; ?>/dashboard">
                     <div class="profile">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M324.5-404.5Q310-419 310-440t14.5-35.5Q339-490 360-490t35.5 14.5Q410-461 410-440t-14.5 35.5Q381-390 360-390t-35.5-14.5Zm240 0Q550-419 550-440t14.5-35.5Q579-490 600-490t35.5 14.5Q650-461 650-440t-14.5 35.5Q621-390 600-390t-35.5-14.5ZM480-160q134 0 227-93t93-227q0-24-3-46.5T786-570q-21 5-42 7.5t-44 2.5q-91 0-172-39T390-708q-32 78-91.5 135.5T160-486v6q0 134 93 227t227 93Zm0 80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-54-715q42 70 114 112.5T700-640q14 0 27-1.5t27-3.5q-42-70-114-112.5T480-800q-14 0-27 1.5t-27 3.5ZM177-581q51-29 89-75t57-103q-51 29-89 75t-57 103Zm249-214Zm-103 36Z"/></svg>
                     </div>
                 </a>
             <?php else: ?>
-                <a href="login">
+                <a href="<?php echo $config["base_path"]; ?>/login">
                     Login
                 </a>
-                <a href="register">
+                <a href="<?php echo $config["base_path"]; ?>/register">
                     Register
                 </a>
             <?php endif; ?>
         </div>
 
         <div class="mobile-menu">
-            <a href="" class="active">
+            <a href="<?php echo $config["base_path"]; ?>" class="active">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>
                 Home                    
             </a>
 
-            <a href="">
+            <a href="<?php echo $config["base_path"]; ?>/trending">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M240-400q0 52 21 98.5t60 81.5q-1-5-1-9v-9q0-32 12-60t35-51l113-111 113 111q23 23 35 51t12 60v9q0 4-1 9 39-35 60-81.5t21-98.5q0-50-18.5-94.5T648-574q-20 13-42 19.5t-45 6.5q-62 0-107.5-41T401-690q-39 33-69 68.5t-50.5 72Q261-513 250.5-475T240-400Zm240 52-57 56q-11 11-17 25t-6 29q0 32 23.5 55t56.5 23q33 0 56.5-23t23.5-55q0-16-6-29.5T537-292l-57-56Zm0-492v132q0 34 23.5 57t57.5 23q18 0 33.5-7.5T622-658l18-22q74 42 117 117t43 163q0 134-93 227T480-80q-134 0-227-93t-93-227q0-129 86.5-245T480-840Z"/></svg>
                 Trending                    
             </a>
 
-            <a href="">
+            <a href="<?php echo $config["base_path"]; ?>/subscriptions">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M160-80q-33 0-56.5-23.5T80-160v-400q0-33 23.5-56.5T160-640h640q33 0 56.5 23.5T880-560v400q0 33-23.5 56.5T800-80H160Zm0-80h640v-400H160v400Zm240-40 240-160-240-160v320ZM160-680v-80h640v80H160Zm120-120v-80h400v80H280ZM160-160v-400 400Z"/></svg>
                 Subscriptions                
             </a>
 
-            <a href="">
+            <a href="<?php echo $config["base_path"]; ?>/library">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m460-380 280-180-280-180v360ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
                 Library
             </a>
@@ -120,32 +120,86 @@ $videos = $videoModel->getVideoById($video["id"]);
 
     <main class="video-section">
         <div class="video-player">
-            <video width="320" height="240" id="video">
-                <source src="../public/uploads/videos/<?php echo $video["filename"] ?>" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div class="player-wrapper">
+                <video id="video">
+                    <source src="../public/uploads/videos/<?php echo $video["filename"] ?>" type="video/mp4">
+                </video>
 
-            <div class="controls">
-                <button id="play">Play</button>
-                <button id="pause">Pause</button>
-                <input id="seek" type="range" min="0" max="100" value="0">
-                <span id="time">0:00</span>
+                <div class="controls">
+                    <button id="play">▶</button>
+                    <button id="pause">⏸</button>
+                    <input id="seek" type="range" min="0" max="100" value="0">
+                    <span id="time">0:00</span>
+                </div>
             </div>
+
             <div class="video-details">
-                Views, description etc
+                <h2><?php echo $video["title"] ?></h2>
+
+                <div class="video-info">
+                    <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg> <?php echo $video["views"] ?></span>
+                    <span><?php echo $video["created_at"] ?></span>
+                </div>
+
+                <p><?php echo $video["description"] ?></p>
             </div>
 
             <div class="video-comments">
-                Comments
+                <h3>Comments</h3>
+
+                <?php if (isset($_SESSION["user_id"])): ?>
+                    <form method="post" action="../video/<?php echo $video["id"]; ?>/comment" class="comment-form">
+                        <input
+                            type="text"
+                            name="comment"
+                            placeholder="Write a comment..."
+                            required
+                        >
+                        <button type="submit">Post</button>
+                    </form>
+                <?php else: ?>
+                    <p class="login-to-comment">Log in to comment</p>
+                <?php endif ?>
+
+                <?php foreach ($comments as $comment): ?>
+                    <div class="comment">
+                        <div class="content">
+                            <div class="author">
+                                <?php echo htmlspecialchars($comment["username"]) ?>
+                            </div>
+
+                            <div class="text">
+                                <?php echo htmlspecialchars($comment["content"]) ?>
+                            </div>
+                        </div>
+
+                        <?php if (isset($_SESSION["user_id"])): ?>
+                            <?php if ($comment["user_id"] === $_SESSION["user_id"]): ?>
+                                <div class="actions">
+                                    <form method="post" action="../video/<?php echo $video["id"]; ?>/delete-comment">
+                                        <input type="hidden" name="comment_id" value="<?php echo $comment["id"]; ?>">
+
+                                        <button type="submit" class="delete-video">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            <?php endif ?>
+                        <?php endif ?>
+                    </div>
+                <?php endforeach ?>
             </div>
         </div>
-        <div class="videos-recommended">
-            Recommended Videos
-        </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 Sander (<a href="https://github.com/sanderhd" target="_blank">sanderhd</a>)</p>
-    </footer>
+        <aside class="videos-recommended">
+            <div class="recommended-card">
+                <img src="">
+                <div class="info">
+                    <h4>Video Title</h4>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg>12k</span>
+                </div>
+            </div>
+        </aside>
+    </main>
 </body>
 </html>
