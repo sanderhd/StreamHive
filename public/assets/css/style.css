@@ -575,9 +575,11 @@ footer a {
   color: #F5F5F5;
   border-radius: 10px;
   text-decoration: none;
+  margin-right: 12px;
+  transition: 0.2s ease;
 }
 .dashboard .dashboard-title .logout:hover {
-  background-color: #ff3333;
+  background-color: #cc0000;
 }
 
 .video-section {

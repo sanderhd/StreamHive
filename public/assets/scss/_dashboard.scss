@@ -19,9 +19,11 @@
             color: $light-color;
             border-radius: 10px;
             text-decoration: none;
+            margin-right: 12px;
+            transition: 0.2s ease;
 
             &:hover {
-                background-color: color.adjust($primary-color, $lightness: 10%);
+                background-color: color.adjust($primary-color, $lightness: -10%);
             }
         }
     }
