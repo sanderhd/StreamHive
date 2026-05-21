@@ -4,12 +4,13 @@
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 15px;
     align-items: center;
     padding: 15px 20px;
     background: $secondary-color;
     border-bottom: 1px solid $accent-color;
-    // position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -183,9 +184,11 @@ nav {
     }
 
     .search {
-        flex: 1;
-        margin: 0 30px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         max-width: 500px;
+        width: 100%;
 
         .search-input {
             background-color: $dark-color;
@@ -234,6 +237,7 @@ nav {
     }
 
     .right {
+        margin-left: auto;
         display: flex;
         align-items: center;
         gap: 15px;

@@ -2,11 +2,13 @@
 nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 15px;
   align-items: center;
   padding: 15px 20px;
   background: #111111;
   border-bottom: 1px solid #222222;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -162,9 +164,11 @@ nav .logo .red {
   color: #FF0000;
 }
 nav .search {
-  flex: 1;
-  margin: 0 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 500px;
+  width: 100%;
 }
 nav .search .search-input {
   background-color: #666666;
@@ -209,6 +213,7 @@ nav .mobile-search .search-input::placeholder {
   }
 }
 nav .right {
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 15px;
