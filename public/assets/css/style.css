@@ -817,6 +817,62 @@ footer a {
     position: static;
   }
 }
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #F5F5F5;
+  padding: 50px 40px;
+  border: 1px solid rgba(34, 34, 34, 0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  max-width: 550px;
+  width: 100%;
+  margin: 0 auto;
+}
+.error-page h1 {
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.error-page h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.error-page p {
+  font-size: 1rem;
+  color: rgb(206.75, 206.75, 206.75);
+  max-width: 400px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+.error-page .buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.error-page .buttons a {
+  text-decoration: none;
+  color: #F5F5F5;
+  background-color: #FF0000;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+.error-page .buttons a:hover {
+  transform: translateY(-3px);
+  background: rgb(255, 25.5, 25.5);
+}
+.error-page .buttons a:active {
+  transform: translateY(0);
+}
+
 body {
   background-color: #111111;
   font-family: "Poppins", sans-serif;

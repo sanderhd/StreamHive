@@ -1,0 +1,66 @@
+@use '_variables.scss' as *;
+@use 'sass:color';
+
+.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: $light-color;
+    padding: 50px 40px;
+    border: 1px solid rgba($color: $accent-color, $alpha: 0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+
+    h1 {
+        font-size: clamp(5rem, 12vw, 9rem);
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 1rem;
+        color: color.adjust($light-color, $lightness: -15%);
+        max-width: 400px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        a {
+            text-decoration: none;
+            color: $light-color;
+            background-color: $primary-color;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: 0.2s ease;
+
+            &:hover {
+                transform: translateY(-3px);
+                background: color.adjust($primary-color, $lightness: 5%);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+}

@@ -42,6 +42,6 @@ class Router {
         }
 
         http_response_code(404);
-        echo "404";
+        require __DIR__ . "/../views/404.php";
     }
 }
