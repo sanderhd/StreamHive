@@ -10,7 +10,14 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Pull latest code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: PHP syntax check
+        run: |
+          find . -name "*.php" -print0 | xargs -0 -n1 php -l
+
+      - name: Deploy to server
         run: |
           cd /var/www/html/streamhive
           git pull origin main
