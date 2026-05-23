@@ -317,7 +317,6 @@ footer a {
 }
 .form-container .video-form .field input,
 .form-container .video-form .field textarea {
-  width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid #666666;

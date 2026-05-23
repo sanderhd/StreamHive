@@ -64,4 +64,47 @@ class VideoService {
             ]
         );
     }
+
+    public function updateVideo($videoId, $userId, $title, $description, $thumbnail = null) {
+        $video = $this->db->queryDatabase(
+            "SELECT * FROM videos WHERE id = :id AND user_id = :user_id",
+            [
+                "id" => $videoId,
+                "user_id" => $userId
+            ]
+        )->fetch();
+
+        if (!$video) {
+            return false;
+        }
+
+        $params = [
+            "id" => $videoId,
+            "user_id" => $userId,
+            "title" => $title,
+            "description" => $description
+        ];
+
+        $sql = "
+            UPDATE videos
+            SET title = :title,
+                description = :description
+        ";
+
+        if ($thumbnail && $thumbnail["name"]) {
+            $thumbPath = "public/uploads/thumbnails/";
+            $thumbName = uniqid() . "_" . basename($thumbnail["name"]);
+
+            move_uploaded_file($thumbnail["tmp_name"], $thumbPath . $thumbName);
+
+            $sql .= ", thumbnail = :thumbnail";
+            $params["thumbnail"] = $thumbName;
+
+            @unlink($thumbPath . $video["thumbnail"]);
+        }
+
+        $sql .= " WHERE id = :id AND user_id = :user_id";
+
+        return $this->db->queryDatabase($sql, $params);
+    }
 }

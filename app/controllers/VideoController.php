@@ -43,4 +43,28 @@ class VideoController {
         header("Location: " . $this->config["base_path"] . "/dashboard");
         exit;
     } 
+
+    public function updateVideo($id) {
+        session_start();
+
+        if (!isset($_SESSION["user_id"])) {
+            header("Location: " . $this->config["base_path"] . "/login");
+        }
+
+        $userId = $_SESSION["user_id"];
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $thumbnail = $_FILES["thumbnail"] ?? null;
+
+        $this->videoService->updateVideo(
+            $id,
+            $userId,
+            $title,
+            $description,
+            $thumbnail
+        );
+
+        header("Location: " . $this->config["base_path"] . "/dashboard");
+        exit;
+    }
 }

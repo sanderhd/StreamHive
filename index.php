@@ -90,6 +90,10 @@ $router->post('/register', function() use ($db) {
     $controller->register();
 });
 
+$router->get('/library', function() {
+    require "views/library.php";
+});
+
 $router->get('/dashboard', function() {
     require "views/dashboard/index.php";
 });
@@ -99,6 +103,11 @@ $router->get('/dashboard/video/edit/:id', function($id) use ($db) {
     $video = $videoModel->getVideoById($id);
 
     require "views/dashboard/video/edit.php";
+});
+
+$router->post('/dashboard/video/edit/:id', function($id) use ($db) {
+    $controller = new VideoController($db);
+    $controller->updateVideo($id);
 });
 
 $router->get('/dashboard/video/upload', function() {
