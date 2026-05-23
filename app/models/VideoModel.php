@@ -45,4 +45,22 @@ class VideoModel {
             ["userid" => $userid]
         )->fetchAll();
     }
+
+    public function getVideos($search) {
+        if (!empty($search)) {
+            return $this->db->queryDatabase(
+                "SELECT * FROM videos
+                WHERE title LIKE :search
+                OR description LIKE :search
+                ORDER BY created_at DESC",
+                [
+                    "search" => "%" . $search . "%"
+                ]
+            );
+        }
+
+        return $this->db->queryDatabase(
+            "SELECT * FROM videos ORDER BY created_at DESC"
+        );
+    }
 }

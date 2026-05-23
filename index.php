@@ -90,7 +90,11 @@ $router->post('/register', function() use ($db) {
     $controller->register();
 });
 
-$router->get('/library', function() {
+$router->get('/library', function() use ($db) {
+    $videoModel = new VideoModel($db);
+    $search = $_GET["search"] ?? "";
+    $videos = $videoModel->getVideos($search);
+
     require "views/library.php";
 });
 

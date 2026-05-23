@@ -872,6 +872,75 @@ footer a {
   transform: translateY(0);
 }
 
+.library {
+  width: 100%;
+  padding: 20px 100px;
+  box-sizing: border-box;
+}
+.library h2 {
+  color: #F5F5F5;
+  margin-bottom: 20px;
+}
+.library .library-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.library .library-grid .library-card {
+  display: flex;
+  gap: 16px;
+  background-color: #111111;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  align-items: flex-start;
+  transform: 0.2s ease;
+}
+.library .library-grid .library-card:hover {
+  background-color: rgb(14.45, 14.45, 14.45);
+}
+.library .library-grid .library-card img {
+  width: 320px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.library .library-grid .library-card .content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.library .library-grid .library-card .content h3 {
+  color: #F5F5F5;
+  font-size: 18px;
+  margin: 0;
+}
+.library .library-grid .library-card .content p {
+  color: #666666;
+  font-size: 14px;
+  opacity: 0.8;
+  margin: 0;
+}
+.library .library-grid .library-card .content .library-information {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 12px;
+  color: #F5F5F5;
+}
+.library .library-grid .library-card .content .library-information .views {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.library .library-grid .library-card .content .library-information .views svg {
+  width: 16px;
+  height: 16px;
+}
+
 body {
   background-color: #111111;
   font-family: "Poppins", sans-serif;
