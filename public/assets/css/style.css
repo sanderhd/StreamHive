@@ -333,6 +333,10 @@ footer a {
 .form-container .video-form .field textarea {
   min-height: 100px;
 }
+.form-container .video-form .field .file-preview {
+  text-align: center;
+  color: #666666;
+}
 .form-container .video-form .field .file-upload {
   display: flex;
   flex-direction: column;
