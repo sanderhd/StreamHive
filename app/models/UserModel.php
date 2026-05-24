@@ -13,4 +13,13 @@ class UserModel {
             ["id" => $id]
         )->fetch();
     }
+
+    public function getUsernameById($id) {
+        return $this->db->queryDatabase(
+            "SELECT username FROM users WHERE id = :id",
+            [
+                "id" => $id
+            ]
+        )->fetch();
+    }
 }

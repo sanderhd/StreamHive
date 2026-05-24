@@ -54,9 +54,19 @@
 
         .video-description {
             color: $dark-color;
-            font-size: 0.9rem;
-            line-height: 1.5;
             margin: 0 16px;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: #888;
+
+                flex-shrink: 0;
+            }
         }
 
         .video-information {

@@ -538,9 +538,16 @@ footer a {
 }
 .video-grid .video-card .video-description {
   color: #666666;
-  font-size: 0.9rem;
-  line-height: 1.5;
   margin: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.video-grid .video-card .video-description svg {
+  width: 20px;
+  height: 20px;
+  fill: #888;
+  flex-shrink: 0;
 }
 .video-grid .video-card .video-information {
   display: flex;
