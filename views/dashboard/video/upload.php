@@ -47,12 +47,17 @@ if (!isset($_SESSION["user_id"])) {
                 
                 <div class="field">
                     <label>Title</label>
-                    <input id="title" type="text" name="title">
+                    <input id="title" type="text" name="title" required>
                 </div>
 
                 <div class="field">
                     <label>Description</label>
                     <textarea id="description" name="description"></textarea>
+                </div>
+
+                <div class="field">
+                    <label>Category</label>
+                    <input id="category" type="text" name="category">
                 </div>
 
                 <div class="field">
@@ -65,7 +70,7 @@ if (!isset($_SESSION["user_id"])) {
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-280h480L570-480 450-320l-90-120-120 160Zm-80 160q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"/></svg>
                         Upload Thumbnail
                     </label>
-                    <input id="thumbnail-upload" type="file" accept=".png" name="thumbnail" />
+                    <input id="thumbnail-upload" type="file" accept=".png" name="thumbnail" required/>
                 </div>
 
                 <div class="field">
@@ -78,7 +83,7 @@ if (!isset($_SESSION["user_id"])) {
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
                         Upload Video
                     </label>
-                    <input id="video-upload" type="file" accept=".mp4" name="video" />
+                    <input id="video-upload" type="file" accept=".mp4" name="video" required/>
                 </div>
 
                 <button>Upload</button>

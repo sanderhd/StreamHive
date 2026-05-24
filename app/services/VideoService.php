@@ -7,7 +7,7 @@ class VideoService {
         $this->db = $db;
     }
 
-    public function uploadVideo($userId, $title, $description, $thumbnail, $video) {
+    public function uploadVideo($userId, $title, $description, $thumbnail, $video, $categoryName) {
         $videoPath = "public/uploads/videos/";
         $thumbPath = "public/uploads/thumbnails/";
 
@@ -17,18 +17,40 @@ class VideoService {
         move_uploaded_file($video["tmp_name"], $videoPath . $videoName);
         move_uploaded_file($thumbnail["tmp_name"], $thumbPath . $thumbName);
 
-        $sql = "
-            INSERT INTO videos (user_id, title, description, filename, thumbnail, views, created_at)
-            VALUES (:user_id, :title, :description, :filename, :thumbnail, 0, NOW())
-        ";
+        $this->db->queryDatabase(
+            "INSERT INTO videos (user_id, title, description, filename, thumbnail, views, created_at)
+            VALUES (:user_id, :title, :description, :filename, :thumbnail, 0, NOW())", 
+            [
+                "user_id" => $userId,
+                "title" => $title,
+                "description" => $description,
+                "filename" => $videoName,
+                "thumbnail" => $thumbName
+            ]
+        );
+        $videoId = $this->db->lastInsertId();
 
-        $this->db->queryDatabase($sql, [
-            "user_id" => $userId,
-            "title" => $title,
-            "description" => $description,
-            "filename" => $videoName,
-            "thumbnail" => $thumbName
-        ]);
+        $this->db->queryDatabase(
+            "INSERT IGNORE INTO categories (name) VALUES (:name)",
+            [
+                "name" => $categoryName
+            ]
+        );
+        $category = $this->db->queryDatabase(
+            "SELECT id FROM categories WHERE name = :name",
+            [
+                "name" => $categoryName
+            ]
+        )->fetch();
+        $categoryId = $category["id"];
+
+        $this->db->queryDatabase(
+            "INSERT INTO video_category (video_id, category_id) VALUES (:video_id, :category_id)",
+            [
+                "video_id" => $videoId,
+                "category_id" => $categoryId
+            ]
+        );
     }
 
     public function deleteVideo($videoId, $userId) {

@@ -23,13 +23,15 @@ class VideoController {
         $description = $_POST["description"];
         $thumbnail = $_FILES["thumbnail"];
         $video = $_FILES["video"];
+        $category = $_POST["category"];
 
         $this->videoService->uploadVideo(
             $userId,
             $title,
             $description,
             $thumbnail,
-            $video
+            $video,
+            $category
         );
 
         header("Location: " . $this->config["base_path"] . "/dashboard");
@@ -37,6 +39,11 @@ class VideoController {
     }
 
     public function deleteVideo($id) {
+        if (!isset($_SESSION["user_id"])) {
+            header("Location: " . $this->config["base_path"] . "/login");
+            exit;
+        }    
+
         $userId = $_SESSION["user_id"];
         $this->videoService->deleteVideo($id, $userId);
 
@@ -45,10 +52,9 @@ class VideoController {
     } 
 
     public function updateVideo($id) {
-        session_start();
-
         if (!isset($_SESSION["user_id"])) {
             header("Location: " . $this->config["base_path"] . "/login");
+            exit;
         }
 
         $userId = $_SESSION["user_id"];

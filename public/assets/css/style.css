@@ -170,13 +170,23 @@ nav .search {
   max-width: 500px;
   width: 100%;
 }
+nav .search svg {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  fill: #F5F5F5;
+  pointer-events: none;
+}
 nav .search .search-input {
-  background-color: #666666;
+  background-color: #111111;
+  border: 1px solid #F5F5F5;
   color: #F5F5F5;
   border-radius: 25px;
-  border: none;
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px 20px 10px 48px;
   font-size: 1em;
   outline: none;
 }

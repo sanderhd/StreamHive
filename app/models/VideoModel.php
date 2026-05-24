@@ -26,12 +26,6 @@ class VideoModel {
         )->fetchAll();
     }
 
-    public function uploadVideo($title, $description, $userid, $filename) {
-        return $this->db->queryDatabase(
-        
-        );
-    }
-
     public function searchVideo($query) {
         return $this->db->queryDatabase(
             "SELECT * FROM videos WHERE title =:query",
