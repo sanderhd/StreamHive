@@ -69,7 +69,9 @@
                 padding: 0 12px;
                 border-radius: 10px;
                 border: 1px solid $dark-color;
-                background-color: $accent-color;
+                background: transparent;
+                color: $light-color;
+                outline: none;
 
                 &:focus {
                     border-color: $primary-color;
@@ -100,7 +102,7 @@
                     }
 
                     svg {
-                        color: $accent-color;
+                        fill: $light-color;
                         width: 20px;
                         height: 20px;
                     }
