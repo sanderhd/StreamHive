@@ -690,15 +690,50 @@ footer a {
 .video-player .video-details .video-info {
   margin-top: 12px;
   display: flex;
-  gap: 14px;
   align-items: center;
+  gap: 16px;
   font-size: 13px;
   color: #aaa;
+  flex-wrap: wrap;
+}
+.video-player .video-details .video-info .info-item,
+.video-player .video-details .video-info .like-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .video-player .video-details .video-info svg {
   width: 18px;
   height: 18px;
-  opacity: 0.8;
+  flex-shrink: 0;
+}
+.video-player .video-details .video-info .like-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.video-player .video-details .video-info .like-btn svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 50;
+  transition: 0.2s ease;
+}
+.video-player .video-details .video-info .like-btn:hover {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+.video-player .video-details .video-info .like-btn:hover svg {
+  fill: rgba(231, 76, 60, 0.2);
+}
+.video-player .video-details .video-info .like-btn.liked {
+  color: #e74c3c;
+}
+.video-player .video-details .video-info .like-btn.liked svg {
+  fill: #e74c3c;
 }
 .video-player .video-comments {
   padding: 20px;
@@ -797,6 +832,7 @@ footer a {
 .videos-recommended .recommended-card {
   display: flex;
   gap: 10px;
+  text-decoration: none;
   padding: 10px;
   border-radius: 12px;
   background-color: #222222;

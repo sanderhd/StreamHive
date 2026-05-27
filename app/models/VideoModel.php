@@ -57,4 +57,15 @@ class VideoModel {
             "SELECT * FROM videos ORDER BY created_at DESC"
         );
     }
+
+    public function getRecommendedVideos($videoId) {
+        return $this->db->queryDatabase(
+            "SELECT * FROM videos
+            WHERE id != :exclude_id
+            ORDER BY views DESC",
+            [
+                "exclude_id" => $videoId,
+            ]
+        )->fetchAll();
+    }
 }

@@ -9,6 +9,7 @@ require_once "app/controllers/AuthController.php";
 require_once "app/controllers/LogoutController.php";
 require_once "app/controllers/VideoController.php";
 require_once "app/controllers/CommentsController.php";
+require_once "app/controllers/LikeController.php";
 
 require_once "app/models/CommentModel.php";
 require_once "app/models/LikeModel.php";
@@ -16,6 +17,7 @@ require_once "app/models/UserModel.php";
 require_once "app/models/VideoModel.php";
 
 require_once "app/services/AuthService.php";
+require_once "app/services/LikeService.php";
 require_once "app/services/CommentService.php";
 require_once "app/services/VideoService.php";
 
@@ -40,9 +42,10 @@ $router->get('/trending', function() use ($db) {
 $router->get('/video/:id', function($id) use ($db) {
     $videoService = new VideoService($db);
     $videoModel = new VideoModel($db);
-
     $commentModel = new CommentModel($db);
     $commentService = new CommentService($commentModel);
+    $likeModel = new LikeModel($db);
+    $likeController = new LikeController($db);
 
     if (!isset($_SESSION["viewed_videos"])) {
         $_SESSION["viewed_videos"] = [];
@@ -55,6 +58,9 @@ $router->get('/video/:id', function($id) use ($db) {
 
     $video = $videoModel->getVideoById($id);
     $comments = $commentService->getComments($id);
+    $videoLikes = $likeModel->getVideoLikes($id);
+    $recommendedVideos = $videoModel->getRecommendedVideos($id);
+    $videoLiked = $likeController->hasLikedVideo($video["id"]);
 
     require "views/video/index.php";
 });
@@ -70,6 +76,11 @@ $router->post('/video/:id/delete-comment', function($id) use ($db) {
     $commentId = $_POST['comment_id'];
 
     $controller->delete($id, $commentId);
+});
+
+$router->post('/video/:id/like', function($id) use ($db) {
+    $controller = new LikeController($db);
+    $controller->likeVideo($id);
 });
 
 $router->get('/login', function() {
