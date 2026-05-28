@@ -255,6 +255,7 @@ nav .right a[href=register]:hover {
   border-color: rgb(255, 25.5, 25.5);
 }
 nav .right .profile {
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -264,16 +265,20 @@ nav .right .profile {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  cursor: pointer;
   transition: transform 0.2s ease;
+}
+nav .right .profile:hover {
+  transform: scale(1.05);
 }
 nav .right .profile .sub-menu-wrap {
   position: absolute;
-  top: 70px;
-  right: 20px;
+  top: calc(100% + 15px);
+  right: 0;
   width: 260px;
   max-height: 0;
   overflow: hidden;
-  transition: 0.2s ease;
+  transition: max-height 0.25s ease;
   z-index: 1000;
 }
 nav .right .profile .sub-menu-wrap.open-menu {
@@ -285,7 +290,7 @@ nav .right .profile .sub-menu-wrap .sub-menu {
   border-radius: 16px;
   padding: 15px;
 }
-nav .right .profile .sub-menu-wrap .sub-menu .submenu-item {
+nav .right .profile .sub-menu-wrap .sub-menu a.submenu-item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -293,27 +298,35 @@ nav .right .profile .sub-menu-wrap .sub-menu .submenu-item {
   border-radius: 10px;
   cursor: pointer;
   color: #F5F5F5;
+  text-decoration: none;
+  font-size: 0.95em;
+  border: none;
   transition: background 0.2s ease;
 }
-nav .right .profile .sub-menu-wrap .sub-menu .submenu-item svg {
+nav .right .profile .sub-menu-wrap .sub-menu a.submenu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: none;
+  border-color: transparent;
+}
+nav .right .profile .sub-menu-wrap .sub-menu a.submenu-item svg {
   width: 22px;
   height: 22px;
   fill: #F5F5F5;
-}
-nav .right .profile .sub-menu-wrap .sub-menu .submenu-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
 }
 nav .right .profile .sub-menu-wrap .sub-menu .user-info {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 15px;
+  padding: 0 4px;
 }
-nav .right .profile .sub-menu-wrap .sub-menu .user-info img {
+nav .right .profile .sub-menu-wrap .sub-menu .user-info svg {
   width: 45px;
   height: 45px;
   border-radius: 50%;
   background-color: #FF0000;
+  flex-shrink: 0;
 }
 nav .right .profile .sub-menu-wrap .sub-menu .user-info h4 {
   color: #F5F5F5;

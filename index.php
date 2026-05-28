@@ -141,6 +141,10 @@ $router->get('/dashboard/video/delete/:id', function($id) use ($db) {
     $controller->deleteVideo($id);
 });
 
+$router->get('/admin', function() {
+    require "views/admin/index.php";
+});
+
 $router->get('/logout', function() {
     $controller = new LogoutController();
     $controller->logout();

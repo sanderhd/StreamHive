@@ -268,7 +268,7 @@ nav {
                 border-color: $accent-color;
             }
 
-            &:active { 
+            &:active {
                 transform: translateY(0);
             }
         }
@@ -285,6 +285,7 @@ nav {
         }
 
         .profile {
+            position: relative;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -294,16 +295,21 @@ nav {
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            cursor: pointer;
             transition: transform 0.2s ease;
+
+            &:hover {
+                transform: scale(1.05);
+            }
 
             .sub-menu-wrap {
                 position: absolute;
-                top: 70px;
-                right: 20px;
+                top: calc(100% + 15px);
+                right: 0;
                 width: 260px;
                 max-height: 0;
                 overflow: hidden;
-                transition: 0.2s ease;
+                transition: max-height 0.25s ease;
                 z-index: 1000;
 
                 &.open-menu {
@@ -316,7 +322,7 @@ nav {
                     border-radius: 16px;
                     padding: 15px;
 
-                    .submenu-item {
+                    a.submenu-item {
                         display: flex;
                         align-items: center;
                         gap: 12px;
@@ -324,16 +330,23 @@ nav {
                         border-radius: 10px;
                         cursor: pointer;
                         color: $light-color;
+                        text-decoration: none;
+                        font-size: 0.95em;
+                        border: none;
                         transition: background 0.2s ease;
+
+                        // Reset the generic .right a styles
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.05);
+                            transform: none;
+                            border-color: transparent;
+                        }
 
                         svg {
                             width: 22px;
                             height: 22px;
                             fill: $light-color;
-                        }
-
-                        &:hover {
-                            background: rgba(255,255,255,0.05);
+                            flex-shrink: 0;
                         }
                     }
 
@@ -342,12 +355,14 @@ nav {
                         align-items: center;
                         gap: 12px;
                         margin-bottom: 15px;
+                        padding: 0 4px;
 
-                        img {
+                        svg {
                             width: 45px;
                             height: 45px;
                             border-radius: 50%;
                             background-color: $primary-color;
+                            flex-shrink: 0;
                         }
 
                         h4 {
