@@ -126,7 +126,9 @@ $router->post('/dashboard/video/edit/:id', function($id) use ($db) {
     $controller->updateVideo($id);
 });
 
-$router->get('/dashboard/video/upload', function() {
+$router->get('/dashboard/video/upload', function() use ($db) {
+    $videoModel = new VideoModel($db);
+    $categories = $videoModel->getCategories();
     require "views/dashboard/video/upload.php";
 });
 

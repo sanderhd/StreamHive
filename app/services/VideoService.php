@@ -7,10 +7,9 @@ class VideoService {
         $this->db = $db;
     }
 
-    public function uploadVideo($userId, $title, $description, $thumbnail, $video, $categoryName) {
+    public function uploadVideo($userId, $title, $description, $thumbnail, $video, $categoryId) {
         $videoPath = "public/uploads/videos/";
         $thumbPath = "public/uploads/thumbnails/";
-
         $videoName = uniqid() . "_" . basename($video["name"]);
         $thumbName = uniqid() . "_" . basename($thumbnail["name"]);
 
@@ -19,35 +18,22 @@ class VideoService {
 
         $this->db->queryDatabase(
             "INSERT INTO videos (user_id, title, description, filename, thumbnail, views, created_at)
-            VALUES (:user_id, :title, :description, :filename, :thumbnail, 0, NOW())", 
+            VALUES (:user_id, :title, :description, :filename, :thumbnail, 0, NOW())",
             [
-                "user_id" => $userId,
-                "title" => $title,
+                "user_id"     => $userId,
+                "title"       => $title,
                 "description" => $description,
-                "filename" => $videoName,
-                "thumbnail" => $thumbName
+                "filename"    => $videoName,
+                "thumbnail"   => $thumbName
             ]
         );
-        $videoId = $this->db->lastInsertId();
 
-        $this->db->queryDatabase(
-            "INSERT IGNORE INTO categories (name) VALUES (:name)",
-            [
-                "name" => $categoryName
-            ]
-        );
-        $category = $this->db->queryDatabase(
-            "SELECT id FROM categories WHERE name = :name",
-            [
-                "name" => $categoryName
-            ]
-        )->fetch();
-        $categoryId = $category["id"];
+        $videoId = $this->db->lastInsertId();
 
         $this->db->queryDatabase(
             "INSERT INTO video_category (video_id, category_id) VALUES (:video_id, :category_id)",
             [
-                "video_id" => $videoId,
+                "video_id"    => $videoId,
                 "category_id" => $categoryId
             ]
         );

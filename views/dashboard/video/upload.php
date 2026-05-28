@@ -11,6 +11,7 @@ $userModel = new UserModel($db);
 $videoModel = new VideoModel($db);
 
 $userId = $_SESSION["user_id"];
+$categories = $videoModel->getCategories();
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: login");
@@ -57,7 +58,14 @@ if (!isset($_SESSION["user_id"])) {
 
                 <div class="field">
                     <label>Category</label>
-                    <input id="category" type="text" name="category">
+                    <select name="category_id" id="category_id" required>
+                        <option value="" disabled selected>Choose a category</option>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category["id"] ?>">
+                                <?= htmlspecialchars($category["name"]) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class="field">

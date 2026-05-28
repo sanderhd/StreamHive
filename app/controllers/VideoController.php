@@ -11,7 +11,7 @@ class VideoController {
     }
 
     public function uploadVideo() {
-        session_start();
+        $categoryId = $_POST["category_id"];
 
         if (!isset($_SESSION["user_id"])) {
             header("Location: /login");
@@ -23,7 +23,6 @@ class VideoController {
         $description = $_POST["description"];
         $thumbnail = $_FILES["thumbnail"];
         $video = $_FILES["video"];
-        $category = $_POST["category"];
 
         $this->videoService->uploadVideo(
             $userId,
@@ -31,7 +30,7 @@ class VideoController {
             $description,
             $thumbnail,
             $video,
-            $category
+            $categoryId
         );
 
         header("Location: " . $this->config["base_path"] . "/dashboard");
