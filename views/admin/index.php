@@ -12,6 +12,10 @@ $videoModel = new VideoModel($db);
 
 $categories = $videoModel->getCategories();
 
+if ($_SESSION["role"] !== "admin") {
+    header("Location: dashboard");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
