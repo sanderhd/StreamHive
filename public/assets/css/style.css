@@ -1062,6 +1062,58 @@ footer a {
   height: 16px;
 }
 
+.categories {
+  color: #F5F5F5;
+  padding: 20px;
+}
+.categories h2 {
+  margin-bottom: 15px;
+}
+.categories table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.categories table th, .categories table td {
+  border: 1px solid #222222;
+  padding: 10px 14px;
+  text-align: left;
+}
+.categories table th {
+  background-color: #111111;
+}
+.categories .add {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+.categories .add input {
+  background: #111111;
+  border: 1px solid #222222;
+  color: #F5F5F5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  outline: none;
+}
+.categories .add button {
+  background: #FF0000;
+  color: #F5F5F5;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.categories .add button:hover {
+  background: rgb(255, 25.5, 25.5);
+}
+.categories .delete-btn {
+  color: #e05555;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+.categories .delete-btn:hover {
+  text-decoration: underline;
+}
+
 body {
   background-color: #111111;
   font-family: "Poppins", sans-serif;

@@ -68,4 +68,30 @@ class VideoModel {
             ]
         )->fetchAll();
     }
+
+    // categories
+
+    public function getCategories() {
+        return $this->db->queryDatabase(
+            "SELECT * FROM categories"
+        )->fetchAll();
+    }
+
+    public function addCategory($name) {
+        return $this->db->queryDatabase(
+            "INSERT INTO categories (name) VALUES (:name)",
+            [
+                "name" => $name
+            ]
+        );
+    }
+
+    public function deleteCategory($id) {
+        return $this->db->queryDatabase(
+            "DELETE FROM categories WHERE id = :id",
+            [
+                "id" => $id
+            ]
+        );
+    }
 }

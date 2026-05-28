@@ -5,6 +5,7 @@ session_start();
 require_once "core/Database.php";
 require_once "core/Router.php";
 
+require_once "app/controllers/AdminController.php";
 require_once "app/controllers/AuthController.php";
 require_once "app/controllers/LogoutController.php";
 require_once "app/controllers/VideoController.php";
@@ -143,6 +144,16 @@ $router->get('/dashboard/video/delete/:id', function($id) use ($db) {
 
 $router->get('/admin', function() {
     require "views/admin/index.php";
+});
+
+$router->post('/admin/categories', function() use ($db, $config) {
+    $controller = new AdminController($db, $config);
+    $controller->addCategory();
+});
+
+$router->get('/admin/categories/delete/:id', function($id) use ($db, $config) {
+    $controller = new AdminController($db, $config);
+    $controller->deleteCategory($id);
 });
 
 $router->get('/logout', function() {

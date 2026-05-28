@@ -16,7 +16,5 @@ class SearchController {
         $this->searchService->searchVideo(
             $params
         );
-
-        
     }
 }

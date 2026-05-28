@@ -1,0 +1,64 @@
+@use '_variables.scss' as *;
+@use 'sass:color';
+
+.categories {
+    color: $light-color;
+    padding: 20px;
+
+    h2 {
+        margin-bottom: 15px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+        th, td {
+            border: 1px solid $accent-color;
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        th {
+            background-color: $secondary-color;
+        }
+    }
+
+    .add {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+
+        input {
+            background: $secondary-color;
+            border: 1px solid $accent-color;
+            color: $light-color;
+            padding: 8px 12px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        button {
+            background: $primary-color;
+            color: $light-color;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+
+            &:hover {
+                background: color.adjust($primary-color, $lightness: 5%);
+            }
+        }
+    }
+
+    .delete-btn {
+        color: #e05555;
+        text-decoration: none;
+        font-size: 0.9em;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
