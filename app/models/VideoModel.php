@@ -40,22 +40,27 @@ class VideoModel {
         )->fetchAll();
     }
 
-    public function getVideos($search) {
+    public function getVideos($search = "", $categoryId = null) {
+        $params = [];
+        $sql = "SELECT videos.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS category_names
+                FROM videos
+                LEFT JOIN video_category ON videos.id = video_category.video_id
+                LEFT JOIN categories ON video_category.category_id = categories.id
+                WHERE 1=1";
+
         if (!empty($search)) {
-            return $this->db->queryDatabase(
-                "SELECT * FROM videos
-                WHERE title LIKE :search
-                OR description LIKE :search
-                ORDER BY created_at DESC",
-                [
-                    "search" => "%" . $search . "%"
-                ]
-            );
+            $sql .= " AND (videos.title LIKE :search OR videos.description LIKE :search)";
+            $params["search"] = "%" . $search . "%";
         }
 
-        return $this->db->queryDatabase(
-            "SELECT * FROM videos ORDER BY created_at DESC"
-        );
+        if (!empty($categoryId)) {
+            $sql .= " AND video_category.category_id = :category_id";
+            $params["category_id"] = $categoryId;
+        }
+
+        $sql .= " GROUP BY videos.id ORDER BY videos.created_at DESC";
+
+        return $this->db->queryDatabase($sql, $params)->fetchAll();
     }
 
     public function getRecommendedVideos($videoId) {

@@ -104,8 +104,11 @@ $router->post('/register', function() use ($db) {
 
 $router->get('/library', function() use ($db) {
     $videoModel = new VideoModel($db);
-    $search = $_GET["search"] ?? "";
-    $videos = $videoModel->getVideos($search);
+    $search = $_GET["search"]   ?? "";
+    $categoryId = $_GET["category"] ?? null;
+
+    $videos = $videoModel->getVideos($search, $categoryId);
+    $categories = $videoModel->getCategories();
 
     require "views/library.php";
 });
