@@ -296,8 +296,65 @@ nav {
             font-weight: bold;
             transition: transform 0.2s ease;
 
-            &:hover {
-                transform: scale(1.1);
+            .sub-menu-wrap {
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                width: 260px;
+                max-height: 0;
+                overflow: hidden;
+                transition: 0.2s ease;
+                z-index: 1000;
+
+                &.open-menu {
+                    max-height: 400px;
+                }
+
+                .sub-menu {
+                    background-color: $secondary-color;
+                    border: 1px solid $accent-color;
+                    border-radius: 16px;
+                    padding: 15px;
+
+                    .submenu-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 12px;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        color: $light-color;
+                        transition: background 0.2s ease;
+
+                        svg {
+                            width: 22px;
+                            height: 22px;
+                            fill: $light-color;
+                        }
+
+                        &:hover {
+                            background: rgba(255,255,255,0.05);
+                        }
+                    }
+
+                    .user-info {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        margin-bottom: 15px;
+
+                        img {
+                            width: 45px;
+                            height: 45px;
+                            border-radius: 50%;
+                            background-color: $primary-color;
+                        }
+
+                        h4 {
+                            color: $light-color;
+                        }
+                    }
+                }
             }
         }
 

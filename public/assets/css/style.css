@@ -266,8 +266,57 @@ nav .right .profile {
   font-weight: bold;
   transition: transform 0.2s ease;
 }
-nav .right .profile:hover {
-  transform: scale(1.1);
+nav .right .profile .sub-menu-wrap {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 260px;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.2s ease;
+  z-index: 1000;
+}
+nav .right .profile .sub-menu-wrap.open-menu {
+  max-height: 400px;
+}
+nav .right .profile .sub-menu-wrap .sub-menu {
+  background-color: #111111;
+  border: 1px solid #222222;
+  border-radius: 16px;
+  padding: 15px;
+}
+nav .right .profile .sub-menu-wrap .sub-menu .submenu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #F5F5F5;
+  transition: background 0.2s ease;
+}
+nav .right .profile .sub-menu-wrap .sub-menu .submenu-item svg {
+  width: 22px;
+  height: 22px;
+  fill: #F5F5F5;
+}
+nav .right .profile .sub-menu-wrap .sub-menu .submenu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+nav .right .profile .sub-menu-wrap .sub-menu .user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+nav .right .profile .sub-menu-wrap .sub-menu .user-info img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #FF0000;
+}
+nav .right .profile .sub-menu-wrap .sub-menu .user-info h4 {
+  color: #F5F5F5;
 }
 @media (max-width: 768px) {
   nav .right {
