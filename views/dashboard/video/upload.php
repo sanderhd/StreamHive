@@ -43,7 +43,7 @@ if (!isset($_SESSION["user_id"])) {
         </div>
 
         <div class="form-container">
-            <form action="upload" method="POST" enctype="multipart/form-data" class="video-form">
+            <form action="<?php echo $config["base_path"]?>/upload" method="POST" enctype="multipart/form-data" class="video-form">
                 <h1>Upload Video</h1>
                 
                 <div class="field">
