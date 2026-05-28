@@ -73,18 +73,13 @@ class VideoService {
         );
     }
 
-    public function updateVideo($videoId, $userId, $title, $description, $thumbnail = null) {
+    public function updateVideo($videoId, $userId, $title, $description, $thumbnail = null, $categoryId = null) {
         $video = $this->db->queryDatabase(
             "SELECT * FROM videos WHERE id = :id AND user_id = :user_id",
-            [
-                "id" => $videoId,
-                "user_id" => $userId
-            ]
+            ["id" => $videoId, "user_id" => $userId]
         )->fetch();
 
-        if (!$video) {
-            return false;
-        }
+        if (!$video) return false;
 
         $params = [
             "id" => $videoId,
@@ -93,26 +88,31 @@ class VideoService {
             "description" => $description
         ];
 
-        $sql = "
-            UPDATE videos
-            SET title = :title,
-                description = :description
-        ";
+        $sql = "UPDATE videos SET title = :title, description = :description";
 
         if ($thumbnail && $thumbnail["name"]) {
             $thumbPath = "public/uploads/thumbnails/";
             $thumbName = uniqid() . "_" . basename($thumbnail["name"]);
-
             move_uploaded_file($thumbnail["tmp_name"], $thumbPath . $thumbName);
-
             $sql .= ", thumbnail = :thumbnail";
             $params["thumbnail"] = $thumbName;
-
             @unlink($thumbPath . $video["thumbnail"]);
         }
 
         $sql .= " WHERE id = :id AND user_id = :user_id";
+        $this->db->queryDatabase($sql, $params);
 
-        return $this->db->queryDatabase($sql, $params);
+        if ($categoryId) {
+            $this->db->queryDatabase(
+                "DELETE FROM video_category WHERE video_id = :video_id",
+                ["video_id" => $videoId]
+            );
+            $this->db->queryDatabase(
+                "INSERT INTO video_category (video_id, category_id) VALUES (:video_id, :category_id)",
+                ["video_id" => $videoId, "category_id" => $categoryId]
+            );
+        }
+
+        return true;
     }
 }

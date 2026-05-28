@@ -120,6 +120,8 @@ $router->get('/dashboard', function() {
 $router->get('/dashboard/video/edit/:id', function($id) use ($db) {
     $videoModel = new VideoModel($db);
     $video = $videoModel->getVideoById($id);
+    $categories = $videoModel->getCategories();
+    $videoCategories = $videoModel->getVideoCategories($id); 
 
     require "views/dashboard/video/edit.php";
 });

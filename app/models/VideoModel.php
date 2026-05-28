@@ -76,6 +76,13 @@ class VideoModel {
 
     // categories
 
+    public function getVideoCategories($videoId) {
+        return $this->db->queryDatabase(
+            "SELECT category_id FROM video_category WHERE video_id = :video_id",
+            ["video_id" => $videoId]
+        )->fetchAll(PDO::FETCH_COLUMN);
+    }
+
     public function getCategories() {
         return $this->db->queryDatabase(
             "SELECT * FROM categories"

@@ -58,6 +58,21 @@ if (!isset($_SESSION["user_id"])) {
                 </div>
 
                 <div class="field">
+                    <label>Category</label>
+                    <select name="category_id" id="category_id" required>
+                        <option value="" disabled>Choose a category</option>
+                        <?php foreach ($categories as $category): ?>
+                            <option 
+                                value="<?= $category["id"] ?>"
+                                <?= in_array($category["id"], $videoCategories) ? 'selected' : '' ?>
+                            >
+                                <?= htmlspecialchars($category["name"]) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="field">
                     <label>Thumbnail</label>
                     <div id="thumbnail-replace" class="file-preview">
                         No file selected

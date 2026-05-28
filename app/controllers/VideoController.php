@@ -60,13 +60,15 @@ class VideoController {
         $title = $_POST["title"];
         $description = $_POST["description"];
         $thumbnail = $_FILES["thumbnail"] ?? null;
+        $categoryId = $_POST["category_id"] ?? null;
 
         $this->videoService->updateVideo(
             $id,
             $userId,
             $title,
             $description,
-            $thumbnail
+            $thumbnail,
+            $categoryId
         );
 
         header("Location: " . $this->config["base_path"] . "/dashboard");
