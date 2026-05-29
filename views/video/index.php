@@ -36,33 +36,61 @@ $videos = $videoModel->getVideoById($video["id"]);
                     <source src="../public/uploads/videos/<?php echo $video["filename"] ?>" type="video/mp4">
                 </video>
 
+                <button id="center-play" class="center-play">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                        <path d="M320-200v-560l440 280-440 280Z"/>
+                    </svg>
+                </button>
+
                 <div class="controls">
-                    <button id="play">▶</button>
-                    <button id="pause">⏸</button>
+                    <button id="toggle-play">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                            <path d="M320-200v-560l440 280-440 280Z"/>
+                        </svg>
+                    </button>
                     <input id="seek" type="range" min="0" max="100" value="0">
                     <span id="time">0:00</span>
+                    <button id="volume-icon" class="volume-icon-btn">
+                        <!-- wordt gevuld door JS -->
+                    </button>
+                    <input id="volume" type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
                 </div>
             </div>
 
             <div class="video-details">
-                <h2><?php echo $video["title"] ?></h2>
+                <h2><?php echo htmlspecialchars($video["title"]) ?></h2>
 
-                <div class="video-info">
-                    <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm146.5-204.5Q340-521 340-580t40.5-99.5Q421-720 480-720t99.5 40.5Q620-639 620-580t-40.5 99.5Q539-440 480-440t-99.5-40.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm100-95.5q47-15.5 86-44.5-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160q53 0 100-15.5ZM523-537q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm-43-43Zm0 360Z"/></svg> <?php echo $userModel->getUsernameById($video["user_id"])["username"]; ?></span>
-                    <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg> <?php echo $video["views"] ?></span>
-                    <span><?= timeAgo($video["created_at"]) ?></span>
+                <div class="video-meta">
+                    <div class="uploader">
+                        <div class="avatar">
+                            <?php echo strtoupper(substr($userModel->getUsernameById($video["user_id"])["username"], 0, 1)); ?>
+                        </div>
+                        <span class="username"><?php echo htmlspecialchars($userModel->getUsernameById($video["user_id"])["username"]); ?></span>
+                    </div>
 
-                    <form method="POST" action="<?php echo $config["base_path"];?>/video/<?php echo $video['id']; ?>/like">
-                        <button type="submit" class="like-btn  <?php echo $videoLiked ? 'liked' : ''; ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
-                                <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
+                    <div class="video-stats">
+                        <span class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#aaa">
+                                <path d="M320-200v-560l440 280-440 280Z"/>
                             </svg>
-                            <?php echo $videoLikes; ?>
-                        </button>
-                    </form>
+                            <?php echo $video["views"] ?>
+                        </span>
+                        <span class="stat"><?= timeAgo($video["created_at"]) ?></span>
+
+                        <form method="POST" action="<?php echo $config["base_path"];?>/video/<?php echo $video['id']; ?>/like">
+                            <button type="submit" class="like-btn <?php echo $videoLiked ? 'liked' : ''; ?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                                    <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/>
+                                </svg>
+                                <?php echo $videoLikes; ?>
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
-                <p><?php echo $video["description"] ?></p>
+                <?php if (!empty($video["description"])): ?>
+                    <p class="description"><?php echo htmlspecialchars($video["description"]) ?></p>
+                <?php endif ?>
             </div>
 
             <div class="video-comments">
