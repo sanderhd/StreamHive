@@ -19,7 +19,7 @@ class AuthController {
 
         $this->authService->registerUser($username, $email, $password);
 
-        header("Location: login");
+        header("Location: dashboard");
         exit;
     }
 

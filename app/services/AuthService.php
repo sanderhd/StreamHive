@@ -10,7 +10,7 @@ class AuthService {
     public function registerUser($username, $email, $password) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        return $this->db->queryDatabase(
+        $this->db->queryDatabase(
             "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)",
             [
                 "username" => $username,
@@ -18,6 +18,22 @@ class AuthService {
                 "password" => $hashedPassword
             ] 
         );
+
+        $user = $this->db->queryDatabase(
+            "SELECT * FROM users WHERE email = :email",
+            [
+                "email" => $email,
+            ]
+        )->fetch();
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["email"] = $user["email"];
+        $_SESSION["role"] = $user["role"];
     }
 
     function loginUser($name, $password) {
