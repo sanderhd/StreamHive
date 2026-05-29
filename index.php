@@ -57,6 +57,10 @@ $router->get('/video/:id', function($id) use ($db) {
         $_SESSION["viewed_videos"][] = $id;
     }
 
+    if (isset($_SESSION["user_id"])) {
+        $videoService->addToHistory($_SESSION["user_id"], $id);
+    }
+
     $video = $videoModel->getVideoById($id);
     $comments = $commentService->getComments($id);
     $videoLikes = $likeModel->getVideoLikes($id);

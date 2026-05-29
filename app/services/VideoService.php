@@ -73,6 +73,17 @@ class VideoService {
         );
     }
 
+    public function addToHistory($userId, $videoId) {
+        $this->db->queryDatabase(
+            "INSERT INTO history (user_id, video_id, watched_at)
+            VALUES (:user_id, :video_id, NOW())",
+            [
+                "user_id" => $userId,
+                "video_id" => $videoId,
+            ]
+        );
+    }
+
     public function updateVideo($videoId, $userId, $title, $description, $thumbnail = null, $categoryId = null) {
         $video = $this->db->queryDatabase(
             "SELECT * FROM videos WHERE id = :id AND user_id = :user_id",
