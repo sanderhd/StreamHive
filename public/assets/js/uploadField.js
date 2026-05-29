@@ -19,6 +19,7 @@ addFilePreview("thumbnail-replace-upload", "thumbnail-replace");
 
 const form = document.querySelector(".video-form");
 const uploadBtn = form.querySelector("button");
+const progressContainer = document.getElementById("progress-container");
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -40,7 +41,7 @@ form.addEventListener("submit", function(e) {
     });
 
     xhr.open("POST", form.action);
-    document.getElementById("progress-container").style.display = "flex";
+    if (progressContainer) progressContainer.style.display = "flex";
     xhr.send(formData);
 
     uploadBtn.disabled = true;
@@ -53,3 +54,14 @@ function updateProgress(percent) {
     if (bar) bar.style.width = percent + "%";
     if (label) label.textContent = percent + "%";
 }
+
+document.getElementById("thumbnail-replace-upload").addEventListener("change", function () {
+    const file = this.files?.[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.querySelector(".current-thumbnail").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});

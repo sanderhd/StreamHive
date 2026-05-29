@@ -24,7 +24,7 @@ if (!isset($_SESSION["user_id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit | Streamhive</title>
-    <link rel="shortcut icon" href="../../public/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../public/images/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="../../../public/assets/css/style.css">
     <script src="../../../public/assets/js/sidebar.js" defer></script>
@@ -34,7 +34,7 @@ if (!isset($_SESSION["user_id"])) {
 
     <main class="dashboard">
         <div class="dashboard-title">
-            <h2>Edit Video | <?php echo $video["title"] ?></h2>
+            <h2>Edit Video</h2>
 
             <div class="title-right">
                 <a href="javascript:history.back()" class="logout">Back</a>
@@ -43,7 +43,7 @@ if (!isset($_SESSION["user_id"])) {
 
         <div class="form-container">
             <form action="<?php echo $config["base_path"]; ?>/dashboard/video/edit/<?php echo $video["id"]; ?>" method="POST" enctype="multipart/form-data" class="video-form">
-                <h1>Edit Video | <?php echo $video["title"]; ?></h1>
+                <h1>Edit Video</h1>
                 
                 <div class="field">
                     <label>Title</label>
@@ -74,6 +74,13 @@ if (!isset($_SESSION["user_id"])) {
 
                 <div class="field">
                     <label>Thumbnail</label>
+
+                    <img 
+                        src="<?php echo $config["base_path"] . '/public/uploads/thumbnails/' . $video["thumbnail"]; ?>" 
+                        alt="Huidige thumbnail"
+                        class="current-thumbnail"
+                    >
+
                     <div id="thumbnail-replace" class="file-preview">
                         No file selected
                     </div>

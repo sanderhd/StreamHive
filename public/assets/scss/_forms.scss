@@ -77,6 +77,14 @@
                 }
             }
 
+            .current-thumbnail {
+                width: 100%;
+                max-width: 400px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                display: block;
+            }
+
             select {
                 padding: 10px 12px;
                 border-radius: 10px;

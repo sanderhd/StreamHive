@@ -422,6 +422,13 @@ footer a {
 .form-container .video-form .field textarea:focus {
   border-color: #FF0000;
 }
+.form-container .video-form .field .current-thumbnail {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: block;
+}
 .form-container .video-form .field select {
   padding: 10px 12px;
   border-radius: 10px;
