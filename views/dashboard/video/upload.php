@@ -94,12 +94,19 @@ if (!isset($_SESSION["user_id"])) {
                     <input id="video-upload" type="file" accept=".mp4" name="video" required/>
                 </div>
 
+                <div id="progress-container" style="display:none" class="progress-wrapper">
+                    <div class="progress-track">
+                        <div id="progress-bar" class="progress-bar"></div>
+                    </div>
+                    <span id="progress-label">0%</span>
+                </div>
+
                 <button>Upload</button>
             </form>
         </div>
     </main>
 
     <?php require __DIR__ . "/../../partials/footer.php"; ?>
-    <script src="../../../public/assets/js/uploadField.js"></script>
+    <script src="../../public/assets/js/uploadField.js"></script>
 </body>
 </html>
