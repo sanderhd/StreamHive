@@ -13,5 +13,15 @@ return [
     ],
 
     // Cloudflare
-    "TURNSTILE_SECRET" => ""
+    "TURNSTILE_SECRET" => "",
+
+    // Google
+    "google" => [ 
+        "client_id" => "",
+        "client_secret" => "",
+        "redirect_uris" => [
+            "",
+            ""
+        ]
+    ]
 ];

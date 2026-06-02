@@ -2,8 +2,11 @@
 
 session_start();
 
+require_once __DIR__ . "/vendor/autoload.php";
+
 require_once "core/Database.php";
 require_once "core/Router.php";
+require_once "core/Helper.php";
 
 require_once "app/controllers/AdminController.php";
 require_once "app/controllers/AuthController.php";
@@ -95,6 +98,16 @@ $router->get('/login', function() {
 $router->post('/login', function() use ($db, $config) {
     $controller = new AuthController($db, $config);
     $controller->login();
+});
+
+$router->get('/auth/google', function() use ($db, $config) {
+    $controller = new AuthController($db, $config);
+    $controller->redirectToGoogle();
+});
+
+$router->get('/auth/google/callback', function() use ($db, $config) {
+    $controller = new AuthController($db, $config);
+    $controller->handleGoogleCallback();
 });
 
 $router->get('/register', function() {

@@ -1,5 +1,8 @@
 <?php
 
+use Google\Client;
+use Google\Service\Oauth2;
+
 require_once __DIR__ . "/../../core/Helper.php";
 
 class AuthController {
@@ -64,6 +67,63 @@ class AuthController {
         }
 
         header("Location: dashboard");
+        exit;
+    }
+
+    public function redirectToGoogle() {
+        $client = new Client();
+
+        $client->setClientId($this->config['google']["client_id"]);
+        $client->setClientSecret($this->config['google']["client_secret"]);
+        $client->setRedirectUri(
+            $this->config['google']['redirect_uris'][0]
+        );
+
+        $client->addScope("email");
+        $client->addScope("profile");
+
+        header("Location: " . $client->createAuthUrl());
+        exit;
+    }
+
+    public function handleGoogleCallback() {
+        $client = new Client();
+
+        $client->setClientId($this->config['google']["client_id"]);
+        $client->setClientSecret($this->config['google']["client_secret"]);
+        $client->setRedirectUri($this->config['google']['redirect_uris'][0]);
+
+        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+
+        if (!isset($token['access_token'])) {
+            abort("Google login failed", 401);
+        }
+
+        $client->setAccessToken($token);
+
+        $oauth = new Oauth2($client);
+        $googleUser = $oauth->userinfo->get();
+
+        $email = $googleUser->email;
+        $name = $googleUser->name;
+        $googleId = $googleUser->id;
+
+        $user = $this->authService->findByEmail($email);
+
+        if (!$user) {
+            $user = $this->authService->createGoogleUser($name, $email, $googleId);
+        }
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["email"] = $user["email"];
+        $_SESSION["role"] = $user["role"];
+
+        header("Location: " . $this->config["base_path"] . "/dashboard");
         exit;
     }
 }

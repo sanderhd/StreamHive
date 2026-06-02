@@ -51,7 +51,7 @@ $db = new Database($config);
 
                 <div class="cf-turnstile" data-sitekey="0x4AAAAAADdkxWYflecmfyNU" data-theme="dark"></div>
 
-                <button>Login</button>
+                <button>Login</button> <a href="<?php echo $config["base_path"] ?>/auth/google" class="google-btn">Login with google</a>
             </form>
             <span class="bottom-text">
                 Don't have an account?

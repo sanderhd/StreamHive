@@ -63,4 +63,27 @@ class AuthService {
 
         return true;
     }
+
+    public function findByEmail($email) {
+        return $this->db->queryDatabase(
+            "SELECT * FROM users WHERE email = :email",
+            [
+                "email" => $email
+            ]
+        )->fetch();
+    }
+
+    public function createGoogleUser($username, $email, $googleId) {
+        $this->db->queryDatabase(
+            "INSERT INTO users (username, email, google_id, password, role)
+            VALUES (:username, :email, :google_id, '', 'user')",
+            [
+                "username" => $username,
+                "email" => $email,
+                "google_id" => $googleId
+            ]
+        );
+
+        return $this->findByEmail($email);
+    }
 }

@@ -1,1 +1,4 @@
 config/Config.php
+vendor
+public/uploads/thumbnails/*
+public/uploads/videos/*
