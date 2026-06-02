@@ -76,7 +76,8 @@ class VideoService {
     public function addToHistory($userId, $videoId) {
         $this->db->queryDatabase(
             "INSERT INTO history (user_id, video_id, watched_at)
-            VALUES (:user_id, :video_id, NOW())",
+            VALUES (:user_id, :video_id, NOW())
+            ON DUPLICATE KEY UPDATE watched_at = NOW()",
             [
                 "user_id" => $userId,
                 "video_id" => $videoId,
