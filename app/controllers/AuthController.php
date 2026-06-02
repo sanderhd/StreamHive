@@ -15,13 +15,13 @@ class AuthController {
         $token = $_POST["cf-turnstile-response"] ?? '';
 
         if (!$token) {
-            die("CAPTCHA missing");
+            abort("CAPTCHA not completed", 400);
         }
 
         $verify = verifyTurnstile($token, $this->config['TURNSTILE_SECRET']);
 
         if (!$verify || !isset($verify["success"]) || !$verify["success"]) {
-            die("CAPTCHA failed");
+            abort("CAPTCHA verification failed. Please try again", 403);
         }
     }
 
@@ -34,11 +34,11 @@ class AuthController {
         $repeatPassword = $_POST['repeat-password'] ?? '';
 
         if (!$username || !$email || !$password) {
-            die("Missing fields");
+            abort("Please fill in all fields", 400);
         }
 
         if ($password !== $repeatPassword) {
-            die("Passwords do not match");
+            abort("Passwords do not match", 400);
         }
 
         $this->authService->registerUser($username, $email, $password);
@@ -54,13 +54,13 @@ class AuthController {
         $password = $_POST['password'] ?? '';
 
         if (!$name || !$password) {
-            die("Missing login fields");
+            abort("Please fill in all fields", 400);
         }
 
         $success = $this->authService->loginUser($name, $password);
 
         if (!$success) {
-            die("Invalid email/username or password");
+            abort("Invalid email/username or password", 401);
         }
 
         header("Location: dashboard");

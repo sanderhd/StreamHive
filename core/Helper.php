@@ -44,3 +44,11 @@ function verifyTurnstile($token, $secret) {
 
     return json_decode($result, true);
 }
+
+function abort($message, $code) {
+    http_response_code($code);
+    $GLOBALS['error_message'] = $message;
+
+    require __DIR__ . "/../views/errors/error.php";
+    exit;
+}

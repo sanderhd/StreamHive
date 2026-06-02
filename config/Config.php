@@ -13,5 +13,5 @@ return [
     ],
 
     // Cloudflare
-    "TURNSTILE_SECRET" => ""
+    "TURNSTILE_SECRET" => "0x4AAAAAADdkxcZIHOMSUWl_r2tAJ6Fwj8E"
 ];
