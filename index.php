@@ -92,8 +92,8 @@ $router->get('/login', function() {
     require "views/auth/login.php";
 });
 
-$router->post('/login', function() use ($db) {
-    $controller = new AuthController($db);
+$router->post('/login', function() use ($db, $config) {
+    $controller = new AuthController($db, $config);
     $controller->login();
 });
 
@@ -101,8 +101,8 @@ $router->get('/register', function() {
     require "views/auth/register.php";
 });
 
-$router->post('/register', function() use ($db) {
-    $controller = new AuthController($db);
+$router->post('/register', function() use ($db, $config) {
+    $controller = new AuthController($db, $config);
     $controller->register();
 });
 

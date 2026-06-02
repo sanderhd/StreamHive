@@ -10,5 +10,8 @@ return [
         "dbname" => "streamhive",
         "username" => "root",
         "password" => ""
-    ]
+    ],
+
+    // Cloudflare
+    "TURNSTILE_SECRET" => ""
 ];

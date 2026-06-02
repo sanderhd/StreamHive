@@ -2,16 +2,11 @@
 require_once __DIR__ . "/../../core/Database.php";
 require_once __DIR__ . "/../../app/services/AuthService.php";
 require_once __DIR__ . "/../../app/controllers/AuthController.php";
+require_once __DIR__ . "/../../core/Helper.php";
 
 $config = require "config/Config.php";
 
 $db = new Database($config);
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $controller = new AuthController($db);
-    $controller->login();
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="public/assets/css/style.css">
     <script src="public/assets/js/sidebar.js" defer></script>
     <script src="public/assets/js/passwordField.js" defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <?php require __DIR__ . "/../partials/navbar.php"; ?>
@@ -53,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </div>
 
-                <a href="">Forgot password?</a>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADdkxWYflecmfyNU" data-theme="dark"></div>
 
                 <button>Login</button>
             </form>
