@@ -106,4 +106,20 @@ class VideoModel {
             ]
         );
     }
+
+    // views
+
+    public function getHistory($userId) {
+        return $this->db->queryDatabase(
+            "SELECT videos.*
+            FROM history
+            INNER JOIN videos
+                ON history.video_id = videos.id
+            WHERE history.user_id = :user_id
+            ORDER BY history.watched_at DESC",
+            [
+                "user_id" => $userId
+            ]
+        )->fetchAll();
+    }
 }

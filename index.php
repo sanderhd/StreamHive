@@ -106,6 +106,21 @@ $router->post('/register', function() use ($db) {
     $controller->register();
 });
 
+$router->get('/history', function () use ($db) {
+    if (!isset($_SESSION["user_id"])) {
+        header("Location: " . $this->config["base_path"] . "/login");
+        exit;
+    }
+
+    $videoModel = new VideoModel($db);
+
+    $videos = $videoModel->getHistory(
+        $_SESSION["user_id"]
+    );
+
+    require "views/history.php";
+});
+
 $router->get('/library', function() use ($db) {
     $videoModel = new VideoModel($db);
     $search = $_GET["search"]   ?? "";
