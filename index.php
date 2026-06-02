@@ -107,11 +107,6 @@ $router->post('/register', function() use ($db) {
 });
 
 $router->get('/history', function () use ($db) {
-    if (!isset($_SESSION["user_id"])) {
-        header("Location: " . $this->config["base_path"] . "/login");
-        exit;
-    }
-
     $videoModel = new VideoModel($db);
 
     $videos = $videoModel->getHistory(
