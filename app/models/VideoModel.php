@@ -111,10 +111,9 @@ class VideoModel {
 
     public function getHistory($userId) {
         return $this->db->queryDatabase(
-            "SELECT videos.*
+            "SELECT videos.*, history.watched_at
             FROM history
-            INNER JOIN videos
-                ON history.video_id = videos.id
+            INNER JOIN videos ON history.video_id = videos.id
             WHERE history.user_id = :user_id
             ORDER BY history.watched_at DESC",
             [

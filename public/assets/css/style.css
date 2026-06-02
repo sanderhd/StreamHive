@@ -1264,6 +1264,35 @@ footer a {
   opacity: 0.6;
 }
 
+.history .library-grid {
+  gap: 14px;
+}
+.history .library-card {
+  overflow: hidden;
+  border-left: 3px solid #e53935;
+}
+.history .library-card::before {
+  display: none;
+}
+.history .library-card img {
+  border-radius: 10px;
+}
+.history .library-card .content h3 {
+  font-size: 16px;
+}
+.history .library-card .content .library-information {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.history .library-card .content .library-information .watched-at {
+  font-size: 11px;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+.history .library-card:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
 .categories {
   color: #F5F5F5;
   padding: 20px;

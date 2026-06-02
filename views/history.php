@@ -18,24 +18,36 @@ $config = require __DIR__ . "/../config/Config.php";
 <body>
     <?php require __DIR__ . "/partials/navbar.php"; ?>
 
-    <main>
-        <h2>History</h2>
+    <main class="library history">
+        <h2>History <span>watched videos</span></h2>
 
         <?php if(empty($videos)): ?>
             <p>You havent watched any videos yet</p>
         <?php else: ?>
-            <div class="videos">
+            <div class="library-grid">
                 <?php foreach($videos as $video): ?>
-                    <div class="video-card">
-                        <a href="<?php echo $config["base_path"]; ?>/video/<?php echo $video["id"]; ?>">
+                        <a class="library-card" href="<?php echo $config["base_path"]; ?>/video/<?php echo $video["id"]; ?>">
                             <img 
-                                src="/uploads/thumbnails/<?php echo $video["thumbnail"] ?>"
+                                src="public/uploads/thumbnails/<?php echo $video["thumbnail"] ?>"
                                 alt="<?php echo $video["title"] ?>"
                             >
 
-                            <h3><?php echo $video["title"] ?></h3>
+                            <div class="content">
+                                <h3><?php echo $video["title"] ?></h3>
+
+                                <p><?php echo $video["description"] ?></p>
+
+                                <div class="library-information">
+                                    <span class="views">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/></svg> <?php echo $video["views"] ?>
+                                    </span>
+
+                                    <span class="watched-at">
+                                        Watched: <?php echo date("d M Y H:i", strtotime($video["watched_at"])) ?>
+                                    </span>
+                                </div>
+                            </div>
                         </a>
-                    </div>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
