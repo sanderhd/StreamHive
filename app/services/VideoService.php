@@ -8,8 +8,8 @@ class VideoService {
     }
 
     public function uploadVideo($userId, $title, $description, $thumbnail, $video, $categoryId) {
-        $videoPath = "public/uploads/videos/";
-        $thumbPath = "public/uploads/thumbnails/";
+        $videoPath = __DIR__ . "/../../public/uploads/videos/";
+        $thumbPath = __DIR__ . "/../../public/uploads/thumbnails/";
         $videoName = uniqid() . "_" . basename($video["name"]);
         $thumbName = uniqid() . "_" . basename($thumbnail["name"]);
 
