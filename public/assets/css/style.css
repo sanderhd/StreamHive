@@ -610,15 +610,6 @@ footer a {
 .auth-form form button:hover {
   opacity: 0.85;
 }
-.auth-form form .cf-turnstile {
-  display: flex;
-  justify-content: center;
-  margin: 4px 0;
-}
-.auth-form form .cf-turnstile iframe {
-  border-radius: 10px;
-  overflow: hidden;
-}
 .auth-form form .google-btn {
   display: flex;
   align-items: center;

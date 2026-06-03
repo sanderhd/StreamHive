@@ -49,7 +49,7 @@ $db = new Database($config);
                     </div>
                 </div>
 
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAADdkxWYflecmfyNU" data-theme="dark"></div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADdkxWYflecmfyNU" data-theme="dark" data-size="flexible"></div>
 
                 <button>Login</button>
                 <a href="<?php echo $config["base_path"] ?>/auth/google" class="google-btn">Login with google</a>
