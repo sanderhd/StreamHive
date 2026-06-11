@@ -679,6 +679,7 @@ footer a {
   width: 100%;
   display: block;
   background-color: #222222;
+  max-height: 215px;
 }
 .video-grid .video-card h3 {
   color: white;
